@@ -12,7 +12,6 @@ from model import data_manager
 from model import common
 
 
-
 def add(table, record):
     """
     Add new record to table
@@ -24,7 +23,7 @@ def add(table, record):
     Returns:
         list: Table with a new record
     """
-    # your code
+    table.append(record)
 
     return table
 
@@ -41,7 +40,10 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    for i, record in table:
+        if record[0] == id_:
+            table.pop(i)
+            break
 
     return table
 
@@ -59,7 +61,10 @@ def update(table, id_, record):
         list: table with updated record
     """
 
-    # your code
+    for i, old_record in table:
+        if old_record[0] == id_:
+            table[i] = record
+            break
 
     return table
 
@@ -78,7 +83,10 @@ def get_oldest_person(table):
         list: A list of strings (name or names if there are two more with the same value)
     """
 
-    # your code
+    oldest_year = table[0][2]
+    for i in range(1, len(table)):
+        if table[i][2] < oldest_year:
+            oldest_year = table[i][2]
 
 
 def get_persons_closest_to_average(table):
@@ -91,5 +99,16 @@ def get_persons_closest_to_average(table):
     Returns:
         list: list of strings (name or names if there are two more with the same value)
     """
+    years = [record[2] for record in table]
+    average = get_average(years)
+    for record in table:
+        pass
 
-    # your code
+
+def get_average(numbers: list) -> float:
+    summed = 0
+    for number in numbers:
+        summed += number
+
+    average = float(summed / len(numbers))
+    return average
