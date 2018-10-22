@@ -3,6 +3,7 @@ from view import terminal_view
 from model.hr import hr
 from controller import common
 
+
 def run():
     """
     Starts this module and displays its menu.
@@ -13,4 +14,27 @@ def run():
         None
     """
 
-    # your code
+    options = ["Show HR",
+               "Add",
+               "Update",
+               "Delete",
+               "Oldest person",
+               "Person closest to average age"]
+
+    choice = None
+    while choice != "0":
+        choice = terminal_view.get_submenu_choice(options)
+        if choice == "1":
+            pass
+        elif choice == "2":
+            pass
+        elif choice == "3":
+            pass
+        elif choice == "4":
+            pass
+        elif choice == "5":
+            pass
+        elif choice == "6":
+            pass
+        else:
+            terminal_view.print_error_message("There is no such choice.")

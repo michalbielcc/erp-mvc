@@ -22,12 +22,11 @@ def print_table(table, title_list):
         None: This function doesn't return anything it only prints to console.
     """
 
-    table = [[2, 'tata', 'apple','sdfs'],[4, '5', 'lotion','ssddv']]
-    title_list = ['id', 'kjhfkjehfkjwehf', 'ab','daff']
+    table = [[2, 'tata', 'apple', 'sdfs'], [4, '5', 'lotion', 'ssddv']]
+    title_list = ['id', 'kjhfkjehfkjwehf', 'ab', 'daff']
 
     table.insert(0, title_list)
     lengths = []
-    
 
     for element in title_list:
         lengths.append(len(element) + 2)
@@ -44,12 +43,11 @@ def print_table(table, title_list):
     print('|' + '-' * x + '|')
 
     for record in table:
-        print('|',end='')
-        for i, element in enumerate(record):        
-            print(f'{element:^{lengths[i]}}|',end='')
+        print('|', end='')
+        for i, element in enumerate(record):
+            print(f'{element:^{lengths[i]}}|', end='')
         print()
         print('|' + x * '-' + '|')
-    
 
 
 def get_longest(lengths, table):
@@ -58,7 +56,6 @@ def get_longest(lengths, table):
             element = str(element)
             if len(element) > lengths[i]:
                 lengths[i] = len(element) + 2
-
 
 
 def print_result(result, label):
@@ -96,7 +93,7 @@ def print_menu(title, list_options, exit_message):
         None: This function doesn't return anything it only prints to console.
     """
     print(title)
-    for i , element in enumerate(list_options):
+    for i, element in enumerate(list_options):
         print(f'\t({i+1}) {element}')
     print((f'\t(0) {exit_message}'))
 
@@ -128,10 +125,18 @@ def get_inputs(list_labels, title):
         inputs.append(input(element + ': '))
     return inputs
 
+
 def get_choice(options):
-    print_menu("Main menu",options, "Exit program")
+    print_menu("Main menu", options, "Exit program")
     inputs = get_inputs(["Please enter a number: "], "")
     return inputs[0]
+
+
+def get_submenu_choice(options):
+    print_menu("Submenu", options, "Return to main menu")
+    inputs = get_inputs(["Please enter a number: "], "")
+    return inputs[0]
+
 
 def print_error_message(message):
     """
