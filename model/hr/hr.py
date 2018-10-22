@@ -133,3 +133,8 @@ def get_average(numbers: list) -> float:
 
     average = float(summed / len(numbers))
     return average
+
+
+def read_hr_data():
+    table = data_manager.get_table_from_file("model\hr\persons.csv")
+    return table

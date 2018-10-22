@@ -25,7 +25,8 @@ def run():
     while choice != "0":
         choice = terminal_view.get_submenu_choice(options)
         if choice == "1":
-            pass
+            table = hr.read_hr_data()
+            terminal_view.print_table(table, ["Id", "Name", "Birth year"])
         elif choice == "2":
             pass
         elif choice == "3":
