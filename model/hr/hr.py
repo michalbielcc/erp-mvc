@@ -40,7 +40,7 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    for i, record in table:
+    for i, record in enumerate(table):
         if record[0] == id_:
             table.pop(i)
             break

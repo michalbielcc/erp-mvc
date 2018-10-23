@@ -36,10 +36,13 @@ def run():
             inputs = terminal_view.get_inputs(["Name", "Birth Year"], "Edit Fields")
             table = hr.update(table, id_, inputs)
         elif choice == "4":
-            pass
+            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
+            table = hr.remove(table, id_)
         elif choice == "5":
-            pass
+            oldest_person = hr.get_oldest_person(table)
+            terminal_view.print_result(oldest_person, "Oldest person: ")
         elif choice == "6":
-            pass
+            near_average = hr.get_persons_closest_to_average(table)
+            terminal_view.print_result(near_average, "Closest to average age: ")
         else:
             terminal_view.print_error_message("There is no such choice.")
