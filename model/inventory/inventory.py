@@ -116,10 +116,8 @@ def get_average_durability_by_manufacturers(table):
     durability_averages = {}
     for record in table:
         durability = int(record[durability_index])
-        print(durability)
         manufacturer = record[manufacturer_index]
-        print(durability_times)
-        durability_times[manufacturer] = durability_times.get(manufacturer, list()).append(durability)
+        durability_times[manufacturer] = durability_times.get(manufacturer, []) + [durability]
 
     for manufacturer in durability_times:
         durability_averages[manufacturer] = get_average(durability_times[manufacturer])
