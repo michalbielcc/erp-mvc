@@ -15,7 +15,6 @@ from model import data_manager
 from model import common
 
 
-
 def add(table, record):
     """
     Add new record to table
@@ -27,7 +26,7 @@ def add(table, record):
     Returns:
         list: Table with a new record
     """
-    # your code
+    table.append(record)
 
     return table
 
@@ -44,7 +43,10 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    for i, record in enumerate(table):
+        if record[0] == id_:
+            table.pop(i)
+            break
 
     return table
 
@@ -62,7 +64,12 @@ def update(table, id_, record):
         list: table with updated record
     """
 
-    # your code
+    for i, old_record in enumerate(table):
+        if old_record[0] == id_:
+            new_record = [id_] + record
+            fill_blanks(new_record, old_record)
+            table[i] = new_record
+            break
 
     return table
 
@@ -81,7 +88,23 @@ def which_year_max(table):
         number
     """
 
-    # your code
+    year_index = 3
+    type_index = 4
+    amount_index = 5
+    profits = {}
+
+    for record in table:
+        year = record[year_index]
+        type_ = record[type_index]
+        amount = int(record[amount_index])
+        if type_ == "in":
+            profits[year] = profits.get(year, 0) + amount
+        elif type_ == "out":
+            profits[year] = profits.get(year, 0) - amount
+
+    listed_profits = profits.items()
+    max_year = max(listed_profits, key=lambda tup: tup[1])[0]
+    return int(max_year)
 
 
 def avg_amount(table, year):
@@ -95,5 +118,47 @@ def avg_amount(table, year):
     Returns:
         number
     """
+    year_index = 3
+    type_index = 4
+    amount_index = 5
+    profits = {}
+    table = [record for record in table if int(record[year_index]) == year]
+    items_count = len(table)
+    for record in table:
+        year = record[year_index]
+        type_ = record[type_index]
+        amount = int(record[amount_index])
+        if type_ == "in":
+            profits[year] = profits.get(year, 0) + amount
+        elif type_ == "out":
+            profits[year] = profits.get(year, 0) - amount
+    return profits[str(year)] / items_count
 
-    # your code
+
+# add to commons
+def get_average(numbers: list) -> float:
+    summed = 0
+    for number in numbers:
+        summed += number
+
+    average = float(summed / len(numbers))
+    return average
+
+
+def read_accounting_data():
+    table = data_manager.get_table_from_file("model/accounting/items.csv")
+    return table
+
+
+def add_id(table, inputs):
+    '''Creates new id and add it to incomplete record(inputs)'''
+    new_id = common.generate_random(table)
+    record = [new_id] + inputs
+    return record
+
+
+def fill_blanks(new, old):
+    '''updates blank places in new with old info'''
+    for i in range(len(old)):
+        if not new[i]:
+            new[i] = old[i]

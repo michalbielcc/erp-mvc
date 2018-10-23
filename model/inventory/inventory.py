@@ -88,7 +88,7 @@ def get_available_items(table):
     """
     year_index = 3
     durability_index = 4
-    current_year = 2015
+    current_year = 2017
     available_items = []
     for record in table:
         record_year = int(record[year_index])
