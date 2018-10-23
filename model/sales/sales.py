@@ -26,7 +26,7 @@ def add(table, record):
     Returns:
         list: Table with a new record
     """
-    # your code
+    table.append(record)
 
     return table
 
@@ -43,7 +43,10 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    for i, record in enumerate(table):
+        if record[0] == id_:
+            table.pop(i)
+            break
 
     return table
 
@@ -61,7 +64,12 @@ def update(table, id_, record):
         list: table with updated record
     """
 
-    # your code
+    for i, old_record in enumerate(table):
+        if old_record[0] == id_:
+            new_record = [id_] + record
+            fill_blanks(new_record, old_record)
+            table[i] = new_record
+            break
 
     return table
 
@@ -80,8 +88,24 @@ def get_lowest_price_item_id(table):
     Returns:
          string: id
     """
+    id_index = 0
+    name_index = 1
+    price_index = 2
+    lowest_price = int(table[0][price_index])
+    cheapest_names = [table[0][name_index]]
+    for i in range(1, len(table)):
+        price = int(table[i][price_index])
+        name = table[i][name_index]
+        if price < lowest_price:
+            cheapest_names = [name]
+            lowest_price = price
+        elif price == lowest_price:
+            cheapest_names.append(name)
 
-    # your code
+    order_alphabetically(cheapest_names)
+    last_name = cheapest_names[-1]
+    id_ = find_id_by_name(last_name, table)
+    return id_
 
 
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
@@ -102,3 +126,53 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     """
 
     # your code
+
+
+def find_id_by_name(name, table):
+    id_index = 0
+    name_index = 1
+    for record in table:
+        if name == record[name_index]:
+            return record[id_index]
+    raise ValueError
+
+
+def order_alphabetically(to_sort: list):  # vurnelable to list with elements of type different from str
+    '''Sorts (in place) elements in the given list in alphabetical order
+
+    Uses simple bubble sort.
+    '''
+
+    for i in range(len(to_sort) - 1):
+        for j in range(len(to_sort) - 1):
+            if to_sort[j].lower() > to_sort[j + 1].lower():
+                to_sort[j], to_sort[j + 1] = to_sort[j + 1], to_sort[j]
+
+
+# add to commons
+def get_average(numbers: list) -> float:
+    summed = 0
+    for number in numbers:
+        summed += number
+
+    average = float(summed / len(numbers))
+    return average
+
+
+def read_inventory_data():
+    table = data_manager.get_table_from_file("model/inventory/inventory.csv")
+    return table
+
+
+def add_id(table, inputs):
+    '''Creates new id and add it to incomplete record(inputs)'''
+    new_id = common.generate_random(table)
+    record = [new_id] + inputs
+    return record
+
+
+def fill_blanks(new, old):
+    '''updates blank places in new with old info'''
+    for i in range(len(old)):
+        if not new[i]:
+            new[i] = old[i]

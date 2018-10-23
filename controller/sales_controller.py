@@ -3,6 +3,7 @@ from view import terminal_view
 from model.sales import sales
 from controller import common
 
+
 def run():
     """
     Starts this module and displays its menu.
