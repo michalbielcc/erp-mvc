@@ -29,9 +29,12 @@ def run():
             terminal_view.print_table(table, ["Id", "Name", "Birth year"])
         elif choice == "2":
             inputs = terminal_view.get_inputs(["Name", "Birth year"], "Add new HR record:")
-
+            new_record = hr.add_id(table, inputs)
+            table = hr.add(table, new_record)
         elif choice == "3":
-            pass
+            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
+            inputs = terminal_view.get_inputs(["Name", "Birth Year"], "Edit Fields")
+            table = hr.update(table, id_, inputs)
         elif choice == "4":
             pass
         elif choice == "5":

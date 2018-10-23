@@ -61,9 +61,11 @@ def update(table, id_, record):
         list: table with updated record
     """
 
-    for i, old_record in table:
+    for i, old_record in enumerate(table):
         if old_record[0] == id_:
-            table[i] = record
+            new_record = [id_] + record
+            fill_blanks(new_record, old_record)
+            table[i] = new_record
             break
 
     return table
@@ -136,5 +138,19 @@ def get_average(numbers: list) -> float:
 
 
 def read_hr_data():
-    table = data_manager.get_table_from_file("model\hr\persons.csv")
+    table = data_manager.get_table_from_file("model/hr/persons.csv")
     return table
+
+
+def add_id(table, inputs):
+    '''Creates new id and add it to incomplete record(inputs)'''
+    new_id = common.generate_random(table)
+    record = [new_id] + inputs
+    return record
+
+
+def fill_blanks(new, old):
+    '''updates blank places in new with old info'''
+    for i in range(len(old)):
+        if not new[i]:
+            new[i] = old[i]

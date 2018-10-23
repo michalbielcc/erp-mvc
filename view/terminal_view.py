@@ -22,9 +22,9 @@ def print_table(table, title_list):
         None: This function doesn't return anything it only prints to console.
     """
 
-    table = [[2, 'tata', 'apple', 'sdfs'], [4, '5', 'lotion', 'ssddv']]
-    title_list = ['id', 'kjhfkjehfkjwehf', 'ab', 'daff']
-
+    # table = [[2, 'tata', 'apple', 'sdfs'], [4, '5', 'lotion', 'ssddv']]
+    # title_list = ['id', 'kjhfkjehfkjwehf', 'ab', 'daff']
+    table = table[:]
     table.insert(0, title_list)
     lengths = []
 
