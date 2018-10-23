@@ -21,14 +21,15 @@ def run():
                "Oldest person",
                "Person closest to average age"]
 
+    table = hr.read_hr_data()
     choice = None
     while choice != "0":
         choice = terminal_view.get_submenu_choice(options)
         if choice == "1":
-            table = hr.read_hr_data()
             terminal_view.print_table(table, ["Id", "Name", "Birth year"])
         elif choice == "2":
-            pass
+            inputs = terminal_view.get_inputs(["Name", "Birth year"], "Add new HR record:")
+
         elif choice == "3":
             pass
         elif choice == "4":
