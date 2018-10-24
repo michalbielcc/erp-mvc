@@ -25,7 +25,7 @@ def add(table, record):
     Returns:
         list: Table with a new record
     """
-    # your code
+    table.append(record)
 
     return table
 
@@ -42,7 +42,10 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    for i, record in enumerate(table):
+        if record[0] == id_:
+            table.pop(i)
+            break
 
     return table
 
@@ -60,7 +63,12 @@ def update(table, id_, record):
         list: table with updated record
     """
 
-    # your code
+    for i, old_record in enumerate(table):
+        if old_record[0] == id_:
+            new_record = [id_] + record
+            fill_blanks(new_record, old_record)
+            table[i] = new_record
+            break
 
     return table
 
@@ -78,8 +86,25 @@ def get_counts_by_manufacturers(table):
     Returns:
          dict: A dictionary with this structure: { [manufacturer] : [count] }
     """
+    games = {}
+    manufacturers = set()
+    amount = 0
 
-    # your code
+    for i in table:
+        manufacturers.add(i[2])
+
+    for i in table:
+        if i[2] in games:            
+            amount = games.get(i[2])
+            amount += 1
+            games[i[2]] = amount
+            amount = 0
+
+        if i[2] not in games:
+            if i[2] in manufacturers:
+                games[i[2]] = 1
+                amount = 0
+    return games
 
 
 def get_average_by_manufacturer(table, manufacturer):
@@ -94,4 +119,29 @@ def get_average_by_manufacturer(table, manufacturer):
          number
     """
 
-    # your code
+    manufacturer = input('Enter name of manufacturer: ')
+
+
+    #for i in table:
+
+
+
+
+
+def read_store_data():
+    table = data_manager.get_table_from_file("model/store/games.csv")
+    return table
+
+
+def add_id(table, inputs):
+    '''Creates new id and add it to incomplete record(inputs)'''
+    new_id = common.generate_random(table)
+    record = [new_id] + inputs
+    return record
+
+
+def fill_blanks(new, old):
+    '''updates blank places in new with old info'''
+    for i in range(len(old)):
+        if not new[i]:
+            new[i] = old[i]
