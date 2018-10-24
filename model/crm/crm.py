@@ -24,7 +24,7 @@ def add(table, record):
     Returns:
         list: Table with a new record
     """
-    # your code
+    table.append(record)
 
     return table
 
@@ -41,7 +41,10 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    for i, record in enumerate(table):
+        if record[0] == id_:
+            table.pop(i)
+            break
 
     return table
 
@@ -59,7 +62,12 @@ def update(table, id_, record):
         list: table with updated record
     """
 
-    # your code
+    for i, old_record in enumerate(table):
+        if old_record[0] == id_:
+            new_record = [id_] + record
+            fill_blanks(new_record, old_record)
+            table[i] = new_record
+            break
 
     return table
 
@@ -69,30 +77,99 @@ def update(table, id_, record):
 
 def get_longest_name_id(table):
     """
-        Question: What is the id of the customer with the longest name?
+    Question: What is the id of the customer with the longest name?
 
-        Args:
-            table (list): data table to work on
+    Args:
+        table (list): data table to work on
 
-        Returns:
-            string: id of the longest name (if there are more than one, return
-                the last by alphabetical order of the names)
-        """
+    Returns:
+        string: id of the longest name (if there are more than one, return
+            the last by alphabetical order of the names)
+    """
+    id_index = 0
+    name_index = 1
+    longest_name = table[0][name_index]
+    names = []
 
-    # your code
+    for i in range(1, len(table)):
+        name = table[i][name_index]
+        if len(name) > len(longest_name):
+            names = [name]
+            longest_name = name
+        elif len(name) == len(longest_name):
+            names.append(name)
+
+    order_alphabetically(names)
+    last_name = names[-1]
+    for record in table:
+        name = record[name_index]
+        if name == last_name:
+            return record[id_index]
+    raise ValueError
 
 
 # the question: Which customers has subscribed to the newsletter?
 # return type: list of strings (where string is like email+separator+name, separator=";")
 def get_subscribed_emails(table):
     """
-        Question: Which customers has subscribed to the newsletter?
+    Question: Which customers has subscribed to the newsletter?
 
-        Args:
-            table (list): data table to work on
+    Args:
+        table (list): data table to work on
 
-        Returns:
-            list: list of strings (where a string is like "email;name")
-        """
+    Returns:
+        list: list of strings (where a string is like "email;name")
+    """
 
-    # your code
+    name_index = 1
+    email_index = 2
+    subscribed_index = 3
+    subscribers = []
+    for record in table:
+        if record[subscribed_index] == '1':
+            name = record[name_index]
+            email = record[email_index]
+            email_name = ';'.join([email, name])
+            subscribers.append(email_name)
+
+    return subscribers
+
+
+def order_alphabetically(to_sort: list):  # vurnelable to list with elements of type different from str
+    '''Sorts (in place) elements in the given list in alphabetical order
+
+    Uses simple bubble sort.
+    '''
+
+    for i in range(len(to_sort) - 1):
+        for j in range(len(to_sort) - 1):
+            if to_sort[j].lower() > to_sort[j + 1].lower():
+                to_sort[j], to_sort[j + 1] = to_sort[j + 1], to_sort[j]
+
+
+def get_average(numbers: list) -> float:
+    summed = 0
+    for number in numbers:
+        summed += number
+
+    average = float(summed / len(numbers))
+    return average
+
+
+def read_crm_data():
+    table = data_manager.get_table_from_file("model/crm/customers.csv")
+    return table
+
+
+def add_id(table, inputs):
+    '''Creates new id and add it to incomplete record(inputs)'''
+    new_id = common.generate_random(table)
+    record = [new_id] + inputs
+    return record
+
+
+def fill_blanks(new, old):
+    '''updates blank places in new with old info'''
+    for i in range(len(old)):
+        if not new[i]:
+            new[i] = old[i]
