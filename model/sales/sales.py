@@ -124,8 +124,22 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     Returns:
         list: list of lists (the filtered table)
     """
+    month_index = 3
+    day_index = 4
+    year_index = 5
 
-    # your code
+    from_date = f"{year_from:0>4}{month_from:0>2}{day_from:0>2}"
+    to_date = f"{year_to:0>4}{month_to:0>2}{day_to:0>2}"
+
+    sold_between = []
+    for record in table:
+        month = record[month_index]
+        day = record[day_index]
+        year = record[year_index]
+        date = f"{year:0>4}{month:0>2}{day:0>2}"
+        if from_date < date < to_date:
+            sold_between.append(record)
+    return sold_between
 
 
 def find_id_by_name(name, table):
@@ -159,8 +173,8 @@ def get_average(numbers: list) -> float:
     return average
 
 
-def read_inventory_data():
-    table = data_manager.get_table_from_file("model/inventory/inventory.csv")
+def read_sales_data():
+    table = data_manager.get_table_from_file("model/sales/sales.csv")
     return table
 
 
