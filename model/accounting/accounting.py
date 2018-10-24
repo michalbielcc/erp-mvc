@@ -121,7 +121,7 @@ def avg_amount(table, year):
     year_index = 3
     type_index = 4
     amount_index = 5
-    profits = {}
+    profits = 0
     table = [record for record in table if int(record[year_index]) == year]
     items_count = len(table)
     for record in table:
@@ -129,10 +129,10 @@ def avg_amount(table, year):
         type_ = record[type_index]
         amount = int(record[amount_index])
         if type_ == "in":
-            profits[year] = profits.get(year, 0) + amount
+            profits += amount
         elif type_ == "out":
-            profits[year] = profits.get(year, 0) - amount
-    return profits[str(year)] / items_count
+            profits -= amount
+    return profits / items_count
 
 
 def read_accounting_data():

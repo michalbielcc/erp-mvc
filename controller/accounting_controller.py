@@ -43,8 +43,16 @@ def run():
             highest_profit_year = accounting.which_year_max(table)
             terminal_view.print_result(highest_profit_year, "Most profitable year: ")
         elif choice == "6":
-            year = int(terminal_view.get_inputs(["Year"], "Enter a year:")[0])
-            average_profit = accounting.avg_amount(table, year)
-            terminal_view.print_result(average_profit, f"Average profit for year {year}: ")
+            average_profit_for_year(table)
         else:
             terminal_view.print_error_message("There is no such choice.")
+
+
+def average_profit_for_year(table):
+    year = int(terminal_view.get_inputs(["Year"], "Enter a year:")[0])
+    try:
+        average_profit = accounting.avg_amount(table, year)
+    except ZeroDivisionError:
+        terminal_view.print_error_message("There is no such year")
+    else:
+        terminal_view.print_result(average_profit, f"Average profit for year {year}: ")
