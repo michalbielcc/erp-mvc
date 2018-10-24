@@ -64,7 +64,7 @@ def update(table, id_, record):
     for i, old_record in enumerate(table):
         if old_record[0] == id_:
             new_record = [id_] + record
-            fill_blanks(new_record, old_record)
+            common.fill_blanks(new_record, old_record)
             table[i] = new_record
             break
 
@@ -113,7 +113,7 @@ def get_persons_closest_to_average(table):
     year_index = 2
 
     years = [int(record[year_index]) for record in table]
-    average = get_average(years)
+    average = common.get_average(years)
 
     smallest_difference = abs(years[0] - average)
     closest = [table[0][name_index]]
@@ -128,15 +128,6 @@ def get_persons_closest_to_average(table):
     return closest
 
 
-def get_average(numbers: list) -> float:
-    summed = 0
-    for number in numbers:
-        summed += number
-
-    average = float(summed / len(numbers))
-    return average
-
-
 def read_hr_data():
     table = data_manager.get_table_from_file("model/hr/persons.csv")
     return table
@@ -147,10 +138,3 @@ def add_id(table, inputs):
     new_id = common.generate_random(table)
     record = [new_id] + inputs
     return record
-
-
-def fill_blanks(new, old):
-    '''updates blank places in new with old info'''
-    for i in range(len(old)):
-        if not new[i]:
-            new[i] = old[i]

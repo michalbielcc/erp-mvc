@@ -66,7 +66,7 @@ def update(table, id_, record):
     for i, old_record in enumerate(table):
         if old_record[0] == id_:
             new_record = [id_] + record
-            fill_blanks(new_record, old_record)
+            common.fill_blanks(new_record, old_record)
             table[i] = new_record
             break
 
@@ -120,19 +120,9 @@ def get_average_durability_by_manufacturers(table):
         durability_times[manufacturer] = durability_times.get(manufacturer, []) + [durability]
 
     for manufacturer in durability_times:
-        durability_averages[manufacturer] = get_average(durability_times[manufacturer])
+        durability_averages[manufacturer] = common.get_average(durability_times[manufacturer])
 
     return durability_averages
-
-
-# add to commons
-def get_average(numbers: list) -> float:
-    summed = 0
-    for number in numbers:
-        summed += number
-
-    average = float(summed / len(numbers))
-    return average
 
 
 def read_inventory_data():
@@ -145,10 +135,3 @@ def add_id(table, inputs):
     new_id = common.generate_random(table)
     record = [new_id] + inputs
     return record
-
-
-def fill_blanks(new, old):
-    '''updates blank places in new with old info'''
-    for i in range(len(old)):
-        if not new[i]:
-            new[i] = old[i]

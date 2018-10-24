@@ -39,3 +39,31 @@ def generate_random(table):
             not_new = False
 
     return generated
+
+
+def get_average(numbers: list) -> float:
+    summed = 0
+    for number in numbers:
+        summed += number
+
+    average = float(summed / len(numbers))
+    return average
+
+
+def fill_blanks(new, old):
+    '''updates blank places in new with old info'''
+    for i in range(len(old)):
+        if not new[i]:
+            new[i] = old[i]
+
+
+def order_alphabetically(to_sort: list):  # vurnelable to list with elements of type different from str
+    '''Sorts (in place) elements in the given list in alphabetical order
+
+    Uses simple bubble sort.
+    '''
+
+    for i in range(len(to_sort) - 1):
+        for j in range(len(to_sort) - 1):
+            if to_sort[j].lower() > to_sort[j + 1].lower():
+                to_sort[j], to_sort[j + 1] = to_sort[j + 1], to_sort[j]

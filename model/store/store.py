@@ -66,7 +66,7 @@ def update(table, id_, record):
     for i, old_record in enumerate(table):
         if old_record[0] == id_:
             new_record = [id_] + record
-            fill_blanks(new_record, old_record)
+            common.fill_blanks(new_record, old_record)
             table[i] = new_record
             break
 
@@ -94,7 +94,7 @@ def get_counts_by_manufacturers(table):
         manufacturers.add(i[2])
 
     for i in table:
-        if i[2] in games:            
+        if i[2] in games:
             amount = games.get(i[2])
             amount += 1
             games[i[2]] = amount
@@ -122,11 +122,12 @@ def get_average_by_manufacturer(table, manufacturer):
     count = 0
 
     for i in table:
-        if i[2].lower() == manufacturer.lower():            
+        if i[2].lower() == manufacturer.lower():
             amount += float(i[4])
             count += 1
 
     return amount / count
+
 
 def read_store_data():
     table = data_manager.get_table_from_file("model/store/games.csv")
@@ -138,10 +139,3 @@ def add_id(table, inputs):
     new_id = common.generate_random(table)
     record = [new_id] + inputs
     return record
-
-
-def fill_blanks(new, old):
-    '''updates blank places in new with old info'''
-    for i in range(len(old)):
-        if not new[i]:
-            new[i] = old[i]
