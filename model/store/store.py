@@ -118,15 +118,15 @@ def get_average_by_manufacturer(table, manufacturer):
     Returns:
          number
     """
+    amount = 0
+    count = 0
 
-    manufacturer = input('Enter name of manufacturer: ')
+    for i in table:
+        if i[2].lower() == manufacturer.lower():            
+            amount += float(i[4])
+            count += 1
 
-
-    #for i in table:
-
-
-
-
+    return amount / count
 
 def read_store_data():
     table = data_manager.get_table_from_file("model/store/games.csv")

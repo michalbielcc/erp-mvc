@@ -42,7 +42,8 @@ def run():
             counts_by_manufacturers = store.get_counts_by_manufacturers(table)
             terminal_view.print_result(counts_by_manufacturers, "Game count by manufacturer: ")
         elif choice == "6":
-            near_average = hr.get_persons_closest_to_average(table)
-            terminal_view.print_result(near_average, "Closest to average age: ")
+            manufacturer = terminal_view.get_inputs(["Manufacturer"], "Enter name of manufacturer: ")[0]
+            average_by_manufacturer = store.get_average_by_manufacturer(table, manufacturer)
+            terminal_view.print_result(average_by_manufacturer, "Averge amount of games: ")
         else:
             terminal_view.print_error_message("There is no such choice.")
