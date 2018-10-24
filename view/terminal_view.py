@@ -21,9 +21,6 @@ def print_table(table, title_list):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
-    # table = [[2, 'tata', 'apple', 'sdfs'], [4, '5', 'lotion', 'ssddv']]
-    # title_list = ['id', 'kjhfkjehfkjwehf', 'ab', 'daff']
     table = table[:]
     table.insert(0, title_list)
     lengths = []
@@ -143,13 +140,13 @@ def get_inputs(list_labels, title):
 
 def get_choice(options):
     print_menu("Main menu", options, "Exit program")
-    inputs = get_inputs(["Please enter a number: "], "")
+    inputs = get_inputs(["Please enter a number"], "")
     return inputs[0]
 
 
 def get_submenu_choice(options):
     print_menu("Submenu", options, "Return to main menu")
-    inputs = get_inputs(["Please enter a number: "], "")
+    inputs = get_inputs(["Please enter a number"], "")
     return inputs[0]
 
 
