@@ -69,7 +69,22 @@ def print_result(result, label):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-    print(label, result)
+    if type(result) is int:
+        print(label, result)
+
+    if type(result) is str:
+            print(label, result)
+
+    if type(result) is float:
+        print(label, result)
+
+    if type(result) is list:
+        for i in result:
+            print(i)
+
+    if type(result) is dict:
+        for key, value in result.items():
+            print(f'{key}: {value}')
 
 
 def print_menu(title, list_options, exit_message):
