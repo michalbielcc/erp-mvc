@@ -13,5 +13,36 @@ def run():
     Returns:
         None
     """
+    options = ["Show Store",
+               "Add",
+               "Update",
+               "Delete",
+               "Game count by manufacturer",
+               "Average count in stock by manufacturer"]
 
-    # your code
+    table = store.read_store_data()
+
+    choice = None
+    while choice != "0":
+        choice = terminal_view.get_submenu_choice(options)
+        if choice == "1":
+            terminal_view.print_table(table, ["Id", "Title", "Manufacturer",'Price','In stock'])
+        elif choice == "2":
+            inputs = terminal_view.get_inputs(["Title", "Manufacturer",'Price','In stock'], "Add new Store record:")
+            new_record = store.add_id(table, inputs)
+            table = store.add(table, new_record)
+        elif choice == "3":
+            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
+            inputs = terminal_view.get_inputs(["Title", "Manufacturer",'Price','In stock'], "Edit Fields")
+            table = store.update(table, id_, inputs)
+        elif choice == "4":
+            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
+            table = store.remove(table, id_)
+        elif choice == "5":
+            counts_by_manufacturers = store.get_counts_by_manufacturers(table)
+            terminal_view.print_result(counts_by_manufacturers, "Game count by manufacturer: ")
+        elif choice == "6":
+            near_average = hr.get_persons_closest_to_average(table)
+            terminal_view.print_result(near_average, "Closest to average age: ")
+        else:
+            terminal_view.print_error_message("There is no such choice.")
