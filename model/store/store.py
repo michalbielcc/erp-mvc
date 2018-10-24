@@ -125,9 +125,11 @@ def get_average_by_manufacturer(table, manufacturer):
         if i[2].lower() == manufacturer.lower():
             amount += float(i[4])
             count += 1
-
-    return amount / count
-
+    try:
+        return amount / count
+    except ZeroDivisionError:
+        print('No such manufacturer, try again')
+        
 
 def read_store_data():
     table = data_manager.get_table_from_file("model/store/games.csv")
