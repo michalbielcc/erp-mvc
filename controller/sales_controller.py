@@ -42,9 +42,19 @@ def run():
             cheapest_items_id = sales.get_lowest_price_item_id(table)
             terminal_view.print_result(cheapest_items_id, "Cheapest item's id: ")
         elif choice == "6":
-            inputs = terminal_view.get_inputs(["month_from", "day_from", "year_from",
-                                               "month_to", "day_to", "year_to"], "Fill form: ")
-            sold_items = sales.get_items_sold_between(table, *inputs)
-            terminal_view.print_result(sold_items, "Sold items: ")
+            sold_between(table)
         else:
             terminal_view.print_error_message("There is no such choice.")
+
+
+def sold_between(table):
+    inputs = terminal_view.get_inputs(["month_from", "day_from", "year_from",
+                                       "month_to", "day_to", "year_to"], "Fill form: ")
+    try:
+        for elem in inputs:
+            int(elem)
+    except ValueError:
+        terminal_view.print_error_message("Enter only number")
+    else:
+        sold_items = sales.get_items_sold_between(table, *inputs)
+        terminal_view.print_result(sold_items, "Sold items: ")

@@ -26,14 +26,14 @@ def run():
     while choice != "0":
         choice = terminal_view.get_submenu_choice(options)
         if choice == "1":
-            terminal_view.print_table(table, ["Id", "Title", "Manufacturer",'Price','In stock'])
+            terminal_view.print_table(table, ["Id", "Title", "Manufacturer", 'Price', 'In stock'])
         elif choice == "2":
-            inputs = terminal_view.get_inputs(["Title", "Manufacturer",'Price','In stock'], "Add new Store record:")
+            inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Add new Store record:")
             new_record = store.add_id(table, inputs)
             table = store.add(table, new_record)
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
-            inputs = terminal_view.get_inputs(["Title", "Manufacturer",'Price','In stock'], "Edit Fields")
+            inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Edit Fields")
             table = store.update(table, id_, inputs)
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
