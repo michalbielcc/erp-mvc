@@ -42,8 +42,16 @@ def run():
             counts_by_manufacturers = store.get_counts_by_manufacturers(table)
             terminal_view.print_result(counts_by_manufacturers, "Game count by manufacturer: ")
         elif choice == "6":
-            manufacturer = terminal_view.get_inputs(["Manufacturer"], "Enter name of manufacturer: ")[0]
-            average_by_manufacturer = store.get_average_by_manufacturer(table, manufacturer)
-            terminal_view.print_result(average_by_manufacturer, "Averge amount of games: ")
+            average_by_manufacturer(table)
         else:
             terminal_view.print_error_message("There is no such choice.")
+
+
+def average_by_manufacturer(table):
+    manufacturer = terminal_view.get_inputs(["Manufacturer"], "Enter name of manufacturer: ")[0]
+    try:
+        average_by_manufacturer = store.get_average_by_manufacturer(table, manufacturer)
+    except ZeroDivisionError:
+        terminal_view.print_error_message('No such manufacturer, try again')
+    else:
+        terminal_view.print_result(average_by_manufacturer, "Averge amount of games: ")

@@ -70,7 +70,7 @@ def print_result(result, label):
         print(label, result)
 
     if type(result) is str:
-            print(label, result)
+        print(label, result)
 
     if type(result) is float:
         print(label, result)
@@ -139,14 +139,16 @@ def get_inputs(list_labels, title):
 
 
 def get_choice(options):
-    print_menu("Main menu", options, "Exit program")
+    print_menu("\nMain menu", options, "Exit program")
     inputs = get_inputs(["Please enter a number"], "")
+    print()
     return inputs[0]
 
 
 def get_submenu_choice(options):
-    print_menu("Submenu", options, "Return to main menu")
+    print_menu("\nSubmenu", options, "Return to main menu")
     inputs = get_inputs(["Please enter a number"], "")
+    print()
     return inputs[0]
 
 
@@ -160,4 +162,4 @@ def print_error_message(message):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-    print(message)
+    print('\n' + message + '\n')
