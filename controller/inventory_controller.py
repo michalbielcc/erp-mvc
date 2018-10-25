@@ -45,7 +45,7 @@ def run():
             else:
                 terminal_view.print_error_message("Use proper characters for input")
         elif choice == "4":
-            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
+            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = inventory.remove(table, id_)
         elif choice == "5":
             available_items = inventory.get_available_items(table)
