@@ -30,19 +30,15 @@ def run():
         elif choice == "2":
             inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Add new Store record:")
             types = [str, str, int, int]
-            if common.check_input(inputs, types):
+            if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = store.add_id(table, inputs)
                 table = store.add(table, new_record)
-            else:
-                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Edit Fields")
             types = [str, str, int, int]
-            if common.check_input(inputs, types):
+            if common.check_input(inputs, types) and check_fields(inputs):
                 table = store.update(table, id_, inputs)
-            else:
-                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = store.remove(table, id_)
@@ -63,3 +59,27 @@ def average_by_manufacturer(table):
         terminal_view.print_error_message('No such manufacturer, try again')
     else:
         terminal_view.print_result(average_by_manufacturer, "Averge amount of games: ")
+
+
+def check_fields(inputs):
+    '''Checks if inputs have expected values'''
+    price_index = 2
+    in_stock_index = 3
+    try:
+        check_price(inputs[price_index])
+        check_in_stock(inputs[in_stock_index])
+    except ValueError as e:
+        terminal_view.print_error_message(str(e))
+        return False
+    else:
+        return True
+
+
+def check_price(price):
+    if int(price) < 0:
+        raise ValueError("Wrong price value.")
+
+
+def check_in_stock(in_stock):
+    if int(in_stock) < 0:
+        raise ValueError("Wrong in stock value.")

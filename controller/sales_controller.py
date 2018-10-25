@@ -30,19 +30,15 @@ def run():
         elif choice == "2":
             inputs = terminal_view.get_inputs(["Title", "Price", "Month", "Day", "Year"], "Add new item to sales:")
             types = [str, int, int, int, int]
-            if common.check_input(inputs, types):
+            if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = sales.add_id(table, inputs)
                 table = sales.add(table, new_record)
-            else:
-                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Title", "Price", "Month", "Day", "Year"], "Edit Fields: ")
             types = [str, int, int, int, int]
-            if common.check_input(inputs, types):
+            if common.check_input(inputs, types) and check_fields(inputs):
                 table = sales.update(table, id_, inputs)
-            else:
-                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = sales.remove(table, id_)
@@ -78,6 +74,29 @@ def sold_between(table):
     else:
         sold_items = sales.get_items_sold_between(table, *inputs)
         terminal_view.print_result(sold_items, "Sold items: ")
+
+
+def check_fields(inputs):
+    '''Checks if inputs have expected values'''
+    price_index = 1
+    month_index = 2
+    day_index = 3
+    year_index = 4
+    try:
+        check_price(inputs[price_index])
+        check_month(inputs[month_index])
+        check_day(inputs[day_index])
+        check_year(inputs[year_index])
+    except ValueError as e:
+        terminal_view.print_error_message(str(e))
+        return False
+    else:
+        return True
+
+
+def check_price(price):
+    if int(price) < 0:
+        raise ValueError("Wrong price input")
 
 
 def check_day(day):

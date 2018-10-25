@@ -30,19 +30,15 @@ def run():
         elif choice == "2":
             inputs = terminal_view.get_inputs(["Name", "Birth year"], "Add new HR record:")
             types = [str, int]
-            if common.check_input(inputs, types):
+            if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = hr.add_id(table, inputs)
                 table = hr.add(table, new_record)
-            else:
-                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Name", "Birth Year"], "Edit Fields")
             types = [str, int]
-            if common.check_input(inputs, types):
+            if common.check_input(inputs, types) and check_fields(inputs):
                 table = hr.update(table, id_, inputs)
-            else:
-                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = hr.remove(table, id_)
@@ -54,3 +50,20 @@ def run():
             terminal_view.print_result(near_average, "Closest to average age: ")
         elif choice != 0:
             terminal_view.print_error_message("There is no such choice.")
+
+
+def check_fields(inputs):
+    '''Checks if inputs have expected values'''
+    year_index = 1
+    try:
+        check_year(inputs[year_index])
+    except ValueError as e:
+        terminal_view.print_error_message(str(e))
+        return False
+    else:
+        return True
+
+
+def check_year(year):
+    if int(year) < 0:
+        raise ValueError("Wrong year value.")

@@ -31,19 +31,15 @@ def run():
             inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year",
                                                "Durability"], "Add new item to inventory:")
             types = [str, str, int, int]
-            if common.check_input(inputs, types):
+            if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = inventory.add_id(table, inputs)
                 table = inventory.add(table, new_record)
-            else:
-                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year", "Durability"], "Edit Fields")
             types = [str, str, int, int]
-            if common.check_input(inputs, types):
+            if common.check_input(inputs, types) and check_fields(inputs):
                 table = inventory.update(table, id_, inputs)
-            else:
-                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = inventory.remove(table, id_)
@@ -55,3 +51,26 @@ def run():
             terminal_view.print_result(durability_averages, "Average durability by manufacturer: ")
         elif choice != 0:
             terminal_view.print_error_message("There is no such choice.")
+
+
+def check_fields(inputs):
+    '''Checks if inputs have expected values'''
+    year_index = 2
+    durability_index = 3
+    try:
+        check_year(inputs[year_index])
+    except ValueError as e:
+        terminal_view.print_error_message(str(e))
+        return False
+    else:
+        return True
+
+
+def check_year(year):
+    if int(year) < 0:
+        raise ValueError("Wrong year value.")
+
+
+def check_durability(durability):
+    if int(durability) < 0:
+        raise ValueError("Wrong durability value.")

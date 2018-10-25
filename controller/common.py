@@ -1,6 +1,7 @@
 """ Common functions for controllers
 implement commonly used functions here
 """
+from view import terminal_view
 
 
 def check_input(inputs, types):
@@ -9,6 +10,7 @@ def check_input(inputs, types):
         try:
             types[i](inputs[i])
         except ValueError:
+            terminal_view.print_error_message("Use proper characters for input")
             return False
     return True
 
