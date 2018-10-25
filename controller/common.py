@@ -2,7 +2,7 @@
 implement commonly used functions here
 """
 from view import terminal_view
-
+from model import data_manager
 
 def check_input(inputs, types):
     '''Checks if inputs have expected format'''
@@ -23,3 +23,6 @@ def check_id_presence(table, id_):
             is_in = True
 
     return is_in
+
+def export_to_file(table, filename):
+    data_manager.write_table_to_file(filename, table)

@@ -33,6 +33,7 @@ def run():
             if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = sales.add_id(table, inputs)
                 table = sales.add(table, new_record)
+                common.export_to_file(table, 'model/sales/sales.csv')
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Title", "Price", "Month", "Day", "Year"], "Edit Fields: ")

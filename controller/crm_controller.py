@@ -33,15 +33,18 @@ def run():
             if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = crm.add_id(table, inputs)
                 table = crm.add(table, new_record)
+                common.export_to_file(table, 'model/crm/customers.csv')
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Name", "Email", "Subscribed"], "Edit Fields: ")
             types = [str, str, int]
             if common.check_input(inputs, types) and check_fields(inputs):
                 table = crm.update(table, id_, inputs)
+                common.export_to_file(table, 'model/crm/customers.csv')
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = crm.remove(table, id_)
+            common.export_to_file(table, 'model/crm/customers.csv')
         elif choice == "5":
             longest_name_id = crm.get_longest_name_id(table)
             terminal_view.print_result(longest_name_id, "Longest name id: ")
