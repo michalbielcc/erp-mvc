@@ -14,61 +14,17 @@ from model import common
 
 
 def add(table, record):
-    """
-    Add new record to table
-
-    Args:
-        table (list): table to add new record to
-        record (list): new record
-
-    Returns:
-        list: Table with a new record
-    """
-    table.append(record)
-
+    common.add(table, record)
     return table
 
 
 def remove(table, id_):
-    """
-    Remove a record with a given id from the table.
-
-    Args:
-        table (list): table to remove a record from
-        id_ (str): id of a record to be removed
-
-    Returns:
-        list: Table without specified record.
-    """
-
-    for i, record in enumerate(table):
-        if record[0] == id_:
-            table.pop(i)
-            break
-
+    common.remove(table, id_)
     return table
 
 
 def update(table, id_, record):
-    """
-    Updates specified record in the table.
-
-    Args:
-        table: list in which record should be updated
-        id_ (str): id of a record to update
-        record (list): updated record
-
-    Returns:
-        list: table with updated record
-    """
-
-    for i, old_record in enumerate(table):
-        if old_record[0] == id_:
-            new_record = [id_] + record
-            common.fill_blanks(new_record, old_record)
-            table[i] = new_record
-            break
-
+    common.update(table, id_, record)
     return table
 
 

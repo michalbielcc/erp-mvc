@@ -33,4 +33,4 @@ def run():
         elif choice == "6":
             crm_controller.run()
         elif choice != 0:
-            terminal_view.print_error_message("There is no such choice.")
+            terminal_view.print_error_message("Good Bye")
