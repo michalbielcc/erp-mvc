@@ -39,7 +39,11 @@ def run():
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Month", "Day", "Year", "Type", "Amount"], "Edit Fields")
-            table = accounting.update(table, id_, inputs)
+            types = [int, int, int, str, int]
+            if common.check_input(inputs, types) == True:
+                table = accounting.update(table, id_, inputs)
+            else:
+                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             table = accounting.remove(table, id_)

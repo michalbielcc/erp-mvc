@@ -30,12 +30,20 @@ def run():
         elif choice == "2":
             inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year",
                                                "Durability"], "Add new item to inventory:")
-            new_record = inventory.add_id(table, inputs)
-            table = inventory.add(table, new_record)
+            types = [str, str, int, int]
+            if common.check_input(inputs, types) == True:
+                new_record = inventory.add_id(table, inputs)
+                table = inventory.add(table, new_record)
+            else:
+                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year", "Durability"], "Edit Fields")
-            table = inventory.update(table, id_, inputs)
+            types = [str, str, int, int]
+            if common.check_input(inputs, types) == True:
+                table = inventory.update(table, id_, inputs)
+            else:
+                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             table = inventory.remove(table, id_)
