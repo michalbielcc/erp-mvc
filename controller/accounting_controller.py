@@ -52,7 +52,7 @@ def run():
             terminal_view.print_result(highest_profit_year, "Most profitable year: ")
         elif choice == "6":
             average_profit_for_year(table)
-        else:
+        elif choice != 0:
             terminal_view.print_error_message("There is no such choice.")
 
 
