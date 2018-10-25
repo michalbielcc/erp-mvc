@@ -40,9 +40,11 @@ def run():
             types = [str, int, int, int, int]
             if common.check_input(inputs, types) and check_fields(inputs):
                 table = sales.update(table, id_, inputs)
+                common.export_to_file(table, 'model/sales/sales.csv')
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = sales.remove(table, id_)
+            common.export_to_file(table, 'model/sales/sales.csv')
         elif choice == "5":
             cheapest_items_id = sales.get_lowest_price_item_id(table)
             terminal_view.print_result(cheapest_items_id, "Cheapest item's id: ")
