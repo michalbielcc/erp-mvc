@@ -52,5 +52,5 @@ def run():
         elif choice == "6":
             subscribers = crm.get_subscribed_emails(table)
             terminal_view.print_result(subscribers, "Subscribers: ")
-        else:
+        elif choice != 0:
             terminal_view.print_error_message("There is no such choice.")

@@ -53,5 +53,5 @@ def run():
         elif choice == "6":
             durability_averages = inventory.get_average_durability_by_manufacturers(table)
             terminal_view.print_result(durability_averages, "Average durability by manufacturer: ")
-        else:
+        elif choice != 0:
             terminal_view.print_error_message("There is no such choice.")

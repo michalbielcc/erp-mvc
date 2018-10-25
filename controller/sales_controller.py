@@ -51,7 +51,7 @@ def run():
             terminal_view.print_result(cheapest_items_id, "Cheapest item's id: ")
         elif choice == "6":
             sold_between(table)
-        else:
+        elif choice != 0:
             terminal_view.print_error_message("There is no such choice.")
 
 
