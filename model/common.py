@@ -69,7 +69,6 @@ def order_alphabetically(to_sort: list):  # vurnelable to list with elements of 
                 to_sort[j], to_sort[j + 1] = to_sort[j + 1], to_sort[j]
 
 
-
 def add(table, record):
     """
     Add new record to table
@@ -122,7 +121,7 @@ def update(table, id_, record):
     for i, old_record in enumerate(table):
         if old_record[0] == id_:
             new_record = [id_] + record
-            common.fill_blanks(new_record, old_record)
+            fill_blanks(new_record, old_record)
             table[i] = new_record
             break
 
