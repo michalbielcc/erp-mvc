@@ -29,12 +29,20 @@ def run():
             terminal_view.print_table(table, ["Id", "Title", "Manufacturer", 'Price', 'In stock'])
         elif choice == "2":
             inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Add new Store record:")
-            new_record = store.add_id(table, inputs)
-            table = store.add(table, new_record)
+            types = [str, str, int, int]
+            if common.check_input(inputs, types) == True:
+                new_record = store.add_id(table, inputs)
+                table = store.add(table, new_record)
+            else:
+                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Edit Fields")
-            table = store.update(table, id_, inputs)
+            types = [str, str, int, int]
+            if common.check_input(inputs, types) == True:
+                table = store.update(table, id_, inputs)
+            else:
+                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             table = store.remove(table, id_)

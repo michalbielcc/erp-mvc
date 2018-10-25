@@ -1,7 +1,7 @@
 """ Common functions for controllers
 implement commonly used functions here
 """
-check_input(inputs, types):
+def check_input(inputs, types):
     '''Checks if inputs have expected format'''
     for i in range(len(inputs)):
         try:

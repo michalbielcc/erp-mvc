@@ -139,8 +139,21 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         date = f"{year:0>4}{month:0>2}{day:0>2}"
         if from_date < date < to_date:
             sold_between.append(record)
-    return sold_between
 
+    try:
+        month_from = int(month_from)
+        day_from = int(day_from)
+        year_from = int(year_from)
+        month_to = int(month_to)
+        day_to = int(day_to)
+        year_to = int(year_to)
+        if month_from > 30:
+            raise ValueError
+            print('Month is 31 days long at most')
+    except ValueError:
+        print('\nUse digits only\n')
+
+    return sold_between
 
 def find_id_by_name(name, table):
     id_index = 0

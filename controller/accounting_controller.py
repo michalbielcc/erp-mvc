@@ -30,8 +30,12 @@ def run():
         elif choice == "2":
             inputs = terminal_view.get_inputs(
                 ["Month", "Day", "Year", "Type", "Amount"], "Add new record to accounting:")
-            new_record = accounting.add_id(table, inputs)
-            table = accounting.add(table, new_record)
+            types = [int, int, int, str, int]
+            if common.check_input(inputs, types) == True:
+                new_record = accounting.add_id(table, inputs)
+                table = accounting.add(table, new_record)
+            else:
+                terminal_view.print_error_message("Use proper characters for input")
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Month", "Day", "Year", "Type", "Amount"], "Edit Fields")
