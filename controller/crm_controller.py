@@ -30,7 +30,7 @@ def run():
         elif choice == "2":
             inputs = terminal_view.get_inputs(["Name", "Email", "Subscribed"], "Add new item to crm:")
             types = [str, str, int]
-            if common.check_input(inputs, types) == True:
+            if common.check_input(inputs, types):
                 new_record = crm.add_id(table, inputs)
                 table = crm.add(table, new_record)
             else:
@@ -39,7 +39,7 @@ def run():
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Name", "Email", "Subscribed"], "Edit Fields: ")
             types = [str, str, int]
-            if common.check_input(inputs, types) == True:
+            if common.check_input(inputs, types):
                 table = crm.update(table, id_, inputs)
             else:
                 terminal_view.print_error_message("Use proper characters for input")

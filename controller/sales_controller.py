@@ -30,7 +30,7 @@ def run():
         elif choice == "2":
             inputs = terminal_view.get_inputs(["Title", "Price", "Month", "Day", "Year"], "Add new item to sales:")
             types = [str, int, int, int, int]
-            if common.check_input(inputs, types) == True:
+            if common.check_input(inputs, types):
                 new_record = sales.add_id(table, inputs)
                 table = sales.add(table, new_record)
             else:
@@ -39,7 +39,7 @@ def run():
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Title", "Price", "Month", "Day", "Year"], "Edit Fields: ")
             types = [str, int, int, int, int]
-            if common.check_input(inputs, types) == True:
+            if common.check_input(inputs, types):
                 table = sales.update(table, id_, inputs)
             else:
                 terminal_view.print_error_message("Use proper characters for input")

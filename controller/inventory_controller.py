@@ -31,7 +31,7 @@ def run():
             inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year",
                                                "Durability"], "Add new item to inventory:")
             types = [str, str, int, int]
-            if common.check_input(inputs, types) == True:
+            if common.check_input(inputs, types):
                 new_record = inventory.add_id(table, inputs)
                 table = inventory.add(table, new_record)
             else:
@@ -40,7 +40,7 @@ def run():
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year", "Durability"], "Edit Fields")
             types = [str, str, int, int]
-            if common.check_input(inputs, types) == True:
+            if common.check_input(inputs, types):
                 table = inventory.update(table, id_, inputs)
             else:
                 terminal_view.print_error_message("Use proper characters for input")
