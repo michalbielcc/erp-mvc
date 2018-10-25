@@ -58,11 +58,44 @@ def run():
 def sold_between(table):
     inputs = terminal_view.get_inputs(["month_from", "day_from", "year_from",
                                        "month_to", "day_to", "year_to"], "Fill form: ")
+
+    month_from_index = 0
+    month_to_index = 3
+    day_from_index = 1
+    day_to_index = 4
+    year_from_index = 2
+    year_to_index = 5
     try:
-        for elem in inputs:
-            int(elem)
-    except ValueError:
-        terminal_view.print_error_message("Enter only number")
+        has_ints(inputs)
+        check_day(inputs[day_from_index])
+        check_day(inputs[day_to_index])
+        check_month(inputs[month_from_index])
+        check_month(inputs[month_to_index])
+        check_year(inputs[year_from_index])
+        check_year(inputs[year_to_index])
+    except ValueError as e:
+        terminal_view.print_error_message(str(e))
     else:
         sold_items = sales.get_items_sold_between(table, *inputs)
         terminal_view.print_result(sold_items, "Sold items: ")
+
+
+def check_day(day):
+    if int(day) > 30 or int(day) < 1:
+        raise ValueError("Wrong day value.")
+
+
+def check_month(month):
+    if int(month) > 12 or int(month) < 1:
+        raise ValueError("Wrong month value.")
+
+
+def check_year(year):
+    if int(year) < 0:
+        raise ValueError("Wrong year value.")
+
+
+def has_ints(table):
+    for element in table:
+        if element.isalpha():
+            raise ValueError("Inputs have to be numbers")
