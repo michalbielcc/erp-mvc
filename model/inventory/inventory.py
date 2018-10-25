@@ -96,7 +96,9 @@ def get_available_items(table):
         validity_date = record_year + record_durability
         if validity_date >= current_year:
             available_items.append(record)
-
+    for i in available_items:
+        i[3] = int(i[3])
+        i[4] = int(i[4])
     return available_items
 
 

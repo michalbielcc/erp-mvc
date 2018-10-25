@@ -139,6 +139,11 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         date = f"{year:0>4}{month:0>2}{day:0>2}"
         if from_date < date < to_date:
             sold_between.append(record)
+        x = 2
+        while x <= 5:
+            for i in sold_between:
+                i[x] = int(i[x])
+            x += 1
 
     return sold_between
 
