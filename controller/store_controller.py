@@ -50,7 +50,7 @@ def run():
             terminal_view.print_result(counts_by_manufacturers, "Game count by manufacturer: ")
         elif choice == "6":
             average_by_manufacturer(table)
-        elif choice != 0:
+        elif choice != '0':
             terminal_view.print_error_message("There is no such choice.")
 
 

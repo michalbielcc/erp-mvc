@@ -51,7 +51,7 @@ def run():
         elif choice == "6":
             near_average = hr.get_persons_closest_to_average(table)
             terminal_view.print_result(near_average, "Closest to average age: ")
-        elif choice != 0:
+        elif choice != '0':
             terminal_view.print_error_message("There is no such choice.")
 
 
