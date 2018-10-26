@@ -37,14 +37,17 @@ def print_table(table, title_list):
 
     x += len(title_list) - 1
 
-    print('|' + '-' * x + '|')
+    print('┌' + '-' * x + '┐')
 
-    for record in table:
+    for j, record in enumerate(table):
         print('|', end='')
         for i, element in enumerate(record):
             print(f'{element:^{lengths[i]}}|', end='')
         print()
-        print('|' + x * '-' + '|')
+        if j < len(table) - 1:
+            print('|' + x * '-' + '|')
+        else:
+            print('└' + x * '-' + '┘')
 
 
 def get_longest(lengths, table):
