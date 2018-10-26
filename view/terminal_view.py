@@ -134,7 +134,7 @@ def get_inputs(list_labels, title):
     print(title)
 
     for element in list_labels:
-        inputs.append(input(element + ': '))
+        inputs.append(input(element + ': ').strip())
     return inputs
 
 
