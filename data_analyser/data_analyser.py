@@ -8,10 +8,10 @@
 
 # importing everything you need
 import os
-import ui
-import common
-from sales import sales
-from crm import crm
+from view import terminal_view
+import model.common
+from model.sales import sales
+from model.crm import crm
 
 
 def start_module():
