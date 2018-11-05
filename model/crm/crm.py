@@ -1,103 +1,159 @@
-""" Customer Relationship Management (CRM) module
-
-Data table structure:
-    * id (string): Unique and random generated identifier
-        at least 2 special characters (except: ';'), 2 number, 2 lower and 2 upper case letters)
-    * name (string)
-    * email (string)
-    * subscribed (int): Is she/he subscribed to the newsletter? 1/0 = yes/no
-"""
-
-# everything you'll need is imported:
-from model import data_manager
-from model import common
+# data structure:
+# id: string
+#     Unique and randomly generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+# name: string
+# email: string
+# subscribed: boolean (Is she/he subscribed to the newsletter? 1/0 = yes/not)
 
 
-def add(table, record):
-    common.add(table, record)
+# importing everything you need
+import os
+# User interface module
+import ui
+# data manager module
+import data_manager
+# common module
+import common
+
+
+def start_module():
+    """
+    Starts this module and displays its menu.
+    User can access default special features from here.
+    User can go back to main menu from here.
+
+    Returns:
+        None
+    """
+
+    # your code
+
+    pass
+
+
+def show_table(table):
+    """
+    Display a table
+
+    Args:
+        table: list of lists to be displayed.
+
+    Returns:
+        None
+    """
+
+    # your code
+
+    pass
+
+
+def add(table):
+    """
+    Asks user for input and adds it into the table.
+
+    Args:
+        table: table to add new record to
+
+    Returns:
+        Table with a new record
+    """
+
+    # your code
+
     return table
 
 
 def remove(table, id_):
-    common.remove(table, id_)
+    """
+    Remove a record with a given id from the table.
+
+    Args:
+        table: table to remove a record from
+        id_ (str): id of a record to be removed
+
+    Returns:
+        Table without specified record.
+    """
+
+    # your code
+
     return table
 
 
-def update(table, id_, record):
-    common.update(table, id_, record)
+def update(table, id_):
+    """
+    Updates specified record in the table. Ask users for new data.
+
+    Args:
+        table: list in which record should be updated
+        id_ (str): id of a record to update
+
+    Returns:
+        table with updated record
+    """
+
+    # your code
+
     return table
 
 
 # special functions:
 # ------------------
 
+
+# the question: What is the id of the customer with the longest name ?
+# return type: string (id) - if there are more than one longest name, return the first by descending alphabetical order
 def get_longest_name_id(table):
-    """
-    Question: What is the id of the customer with the longest name?
 
-    Args:
-        table (list): data table to work on
+    # your code
 
-    Returns:
-        string: id of the longest name (if there are more than one, return
-            the last by alphabetical order of the names)
-    """
-    id_index = 0
-    name_index = 1
-    longest_name = table[0][name_index]
-    names = []
-
-    for i in range(1, len(table)):
-        name = table[i][name_index]
-        if len(name) > len(longest_name):
-            names = [name]
-            longest_name = name
-        elif len(name) == len(longest_name):
-            names.append(name)
-
-    common.order_alphabetically(names)
-    last_name = names[-1]
-    for record in table:
-        name = record[name_index]
-        if name == last_name:
-            return record[id_index]
-    raise ValueError
+    pass
 
 
 # the question: Which customers has subscribed to the newsletter?
 # return type: list of strings (where string is like email+separator+name, separator=";")
 def get_subscribed_emails(table):
+
+    # your code
+
+    pass
+
+
+# functions supports data analyser
+# --------------------------------
+
+
+def get_name_by_id(id):
+
     """
-    Question: Which customers has subscribed to the newsletter?
+    Reads the table with the help of the data_manager module.
+    Returns the name (str) of the customer with the given id (str) on None om case of non-existing id.
 
     Args:
-        table (list): data table to work on
+        id (str): the id of the customer
 
     Returns:
-        list: list of strings (where a string is like "email;name")
+        str the name of the customer
     """
 
-    name_index = 1
-    email_index = 2
-    subscribed_index = 3
-    subscribers = []
-    for record in table:
-        if record[subscribed_index] == '1':
-            name = record[name_index]
-            email = record[email_index]
-            email_name = ';'.join([email, name])
-            subscribers.append(email_name)
+    # your code
 
-    return subscribers
+    pass
 
 
-def read_crm_data():
-    table = data_manager.get_table_from_file("model/crm/customers.csv")
-    return table
+def get_name_by_id_from_table(table, id):
 
+    """
+    Returns the name (str) of the customer with the given id (str) on None om case of non-existing id.
 
-def add_id(table, inputs):
-    '''Creates new id and add it to incomplete record(inputs)'''
-    new_id = common.generate_random(table)
-    record = [new_id] + inputs
-    return record
+    Args:
+        table (list of lists): the customer table
+        id (str): the id of the customer
+
+    Returns:
+        str the name of the customer
+    """
+
+    # your code
+
+    pass

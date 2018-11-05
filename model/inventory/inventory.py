@@ -1,95 +1,123 @@
-""" Inventory module
-
-Data table structure:
-    * id (string): Unique and random generated identifier
-        at least 2 special characters (except: ';'), 2 number, 2 lower and 2 upper case letters)
-    * name (string): Name of item
-    * manufacturer (string)
-    * purchase_year (number): Year of purchase
-    * durability (number): Years it can be used
-"""
-
-# everything you'll need is imported:
-from model import data_manager
-from model import common
+# data structure:
+# id: string
+#     Unique and random generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+# name: string
+# manufacturer: string
+# purchase_date: number (year)
+# durability: number (year)
 
 
-def add(table, record):
-    common.add(table, record)
+# importing everything you need
+import os
+# User interface module
+import ui
+# data manager module
+import data_manager
+# common module
+import common
+
+
+def start_module():
+    """
+    Starts this module and displays its menu.
+    User can access default special features from here.
+    User can go back to main menu from here.
+
+    Returns:
+        None
+    """
+
+    # you code
+
+    pass
+
+
+def show_table(table):
+    """
+    Display a table
+
+    Args:
+        table: list of lists to be displayed.
+
+    Returns:
+        None
+    """
+
+    # your code
+
+    pass
+
+
+def add(table):
+    """
+    Asks user for input and adds it into the table.
+
+    Args:
+        table: table to add new record to
+
+    Returns:
+        Table with a new record
+    """
+
+    # your code
+
     return table
 
 
 def remove(table, id_):
-    common.remove(table, id_)
+    """
+    Remove a record with a given id from the table.
+
+    Args:
+        table: table to remove a record from
+        id_ (str): id of a record to be removed
+
+    Returns:
+        Table without specified record.
+    """
+
+    # your code
+
     return table
 
 
-def update(table, id_, record):
-    common.update(table, id_, record)
+def update(table, id_):
+    """
+    Updates specified record in the table. Ask users for new data.
+
+    Args:
+        table: list in which record should be updated
+        id_ (str): id of a record to update
+
+    Returns:
+        table with updated record
+    """
+
+    # your code
+
     return table
 
 
 # special functions:
 # ------------------
 
+# the question: Which items have not exceeded their durability yet?
+# return type: list of lists (the inner list contains the whole row with their actual data types)
+#
+# @table: list of lists
 def get_available_items(table):
-    """
-    Question: Which items have not exceeded their durability yet?
 
-    Args:
-        table (list): data table to work on
+    # your code
 
-    Returns:
-        list: list of lists (the inner list contains the whole row with their actual data types)
-    """
-    year_index = 3
-    durability_index = 4
-    current_year = 2017
-    available_items = []
-    for record in table:
-        record_year = int(record[year_index])
-        record_durability = int(record[durability_index])
-        validity_date = record_year + record_durability
-        if validity_date >= current_year:
-            available_items.append(record)
-    for i in available_items:
-        i[3] = int(i[3])
-        i[4] = int(i[4])
-    return available_items
+    pass
 
 
+# the question: What are the average durability times for each manufacturer?
+# return type: a dictionary with this structure: { [manufacturer] : [avg] }
+#
+# @table: list of lists
 def get_average_durability_by_manufacturers(table):
-    """
-    Question: What are the average durability times for each manufacturer?
 
-    Args:
-        table (list): data table to work on
+    # your code
 
-    Returns:
-        dict: a dictionary with this structure: { [manufacturer] : [avg] }
-    """
-    manufacturer_index = 2
-    durability_index = 4
-    durability_times = {}
-    durability_averages = {}
-    for record in table:
-        durability = int(record[durability_index])
-        manufacturer = record[manufacturer_index]
-        durability_times[manufacturer] = durability_times.get(manufacturer, []) + [durability]
-
-    for manufacturer in durability_times:
-        durability_averages[manufacturer] = common.get_average(durability_times[manufacturer])
-
-    return durability_averages
-
-
-def read_inventory_data():
-    table = data_manager.get_table_from_file("model/inventory/inventory.csv")
-    return table
-
-
-def add_id(table, inputs):
-    '''Creates new id and add it to incomplete record(inputs)'''
-    new_id = common.generate_random(table)
-    record = [new_id] + inputs
-    return record
+    pass

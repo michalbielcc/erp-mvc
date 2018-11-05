@@ -1,96 +1,118 @@
-""" Store module
+# data structure:
+# id: string
+#     Unique and random generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+# title: string
+# manufacturer: string
+# price: number (dollars)
+# in_stock: number
 
-Data table structure:
-    * id (string): Unique and random generated identifier
-        at least 2 special characters (except: ';'), 2 number, 2 lower and 2 upper case letters)
-    * title (string): Title of the game
-    * manufacturer (string)
-    * price (number): Price in dollars
-    * in_stock (number)
-"""
-
-# everything you'll need is imported:
-from model import data_manager
-from model import common
+# importing everything you need
+import os
+# User interface module
+import ui
+# data manager module
+import data_manager
+# common module
+import common
 
 
-def add(table, record):
-    common.add(table, record)
+def start_module():
+    """
+    Starts this module and displays its menu.
+    User can access default special features from here.
+    User can go back to main menu from here.
+
+    Returns:
+        None
+    """
+
+    # your code
+
+    pass
+
+
+def show_table(table):
+    """
+    Display a table
+
+    Args:
+        table: list of lists to be displayed.
+
+    Returns:
+        None
+    """
+
+    # your code
+
+    pass
+
+
+def add(table):
+    """
+    Asks user for input and adds it into the table.
+
+    Args:
+        table: table to add new record to
+
+    Returns:
+        Table with a new record
+    """
+
+    # your code
+
     return table
 
 
 def remove(table, id_):
-    common.remove(table, id_)
+    """
+    Remove a record with a given id from the table.
+
+    Args:
+        table: table to remove a record from
+        id_ (str): id of a record to be removed
+
+    Returns:
+        Table without specified record.
+    """
+
+    # your code
+
     return table
 
 
-def update(table, id_, record):
-    common.update(table, id_, record)
+def update(table, id_):
+    """
+    Updates specified record in the table. Ask users for new data.
+
+    Args:
+        table: list in which record should be updated
+        id_ (str): id of a record to update
+
+    Returns:
+        table with updated record
+    """
+
+    # your code
+
     return table
 
 
 # special functions:
 # ------------------
 
+# the question: How many different kinds of game are available of each manufacturer?
+# return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
-    """
-    Question: How many different kinds of game are available of each manufacturer?
 
-    Args:
-        table (list): data table to work on
+    # your code
 
-    Returns:
-         dict: A dictionary with this structure: { [manufacturer] : [count] }
-    """
-    games = {}
-    manufacturers = set()
-    amount = 0
-
-    for i in table:
-        manufacturers.add(i[2])
-
-    for i in table:
-        if i[2] in games:
-            amount = games.get(i[2])
-            amount += 1
-            games[i[2]] = amount
-            amount = 0
-
-        if i[2] not in games:
-            if i[2] in manufacturers:
-                games[i[2]] = 1
-                amount = 0
-    return games
+    pass
 
 
+# the question: What is the average amount of games in stock of a given manufacturer?
+# return type: number
 def get_average_by_manufacturer(table, manufacturer):
-    """
-    Question: What is the average amount of games in stock of a given manufacturer?
 
-    Args:
-        table (list): data table to work on
-        manufacturer (str): Name of manufacturer
+    # your code
 
-    Returns:
-         number
-    """
-    amount = 0
-    count = 0
-
-    for i in table:
-        if i[2].lower() == manufacturer.lower():
-            amount += float(i[4])
-            count += 1
-    return amount / count
-
-
-def read_store_data():
-    table = data_manager.get_table_from_file("model/store/games.csv")
-    return table
-
-
-def add_id(table, inputs):
-    '''Creates new id and add it to incomplete record(inputs)'''
-    new_id = common.generate_random(table)
-    record = [new_id] + inputs
-    return record
+    pass
