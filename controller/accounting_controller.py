@@ -1,6 +1,6 @@
 # everything you'll need is imported:
 from view import terminal_view
-from model.accounting import accounting
+from accounting import accounting
 from controller import common
 
 
@@ -34,18 +34,18 @@ def run():
             if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = accounting.add_id(table, inputs)
                 table = accounting.add(table, new_record)
-                common.export_to_file(table, 'model/accounting/items.csv')
+                common.export_to_file(table, 'accounting/items.csv')
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Month", "Day", "Year", "Type", "Amount"], "Edit Fields")
             types = [int, int, int, str, int]
             if common.check_input(inputs, types) and check_fields(inputs):
                 table = accounting.update(table, id_, inputs)
-                common.export_to_file(table, 'model/accounting/items.csv')
+                common.export_to_file(table, 'accounting/items.csv')
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = accounting.remove(table, id_)
-            common.export_to_file(table, 'model/accounting/items.csv')
+            common.export_to_file(table, 'accounting/items.csv')
         elif choice == "5":
             highest_profit_year = accounting.which_year_max(table)
             terminal_view.print_result(highest_profit_year, "Most profitable year: ")
