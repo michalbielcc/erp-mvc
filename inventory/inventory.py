@@ -84,7 +84,7 @@ def get_average_durability_by_manufacturers(table):
 
 
 def read_inventory_data():
-    table = data_manager.get_table_from_file("model/inventory/inventory.csv")
+    table = data_manager.get_table_from_file("inventory/inventory.csv")
     return table
 
 

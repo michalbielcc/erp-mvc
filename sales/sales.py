@@ -114,7 +114,7 @@ def find_id_by_name(name, table):
 
 
 def read_sales_data():
-    table = data_manager.get_table_from_file("model/sales/sales.csv")
+    table = data_manager.get_table_from_file("sales/sales.csv")
     return table
 
 

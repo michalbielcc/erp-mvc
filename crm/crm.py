@@ -92,7 +92,7 @@ def get_subscribed_emails(table):
 
 
 def read_crm_data():
-    table = data_manager.get_table_from_file("model/crm/customers.csv")
+    table = data_manager.get_table_from_file("crm/customers.csv")
     return table
 
 

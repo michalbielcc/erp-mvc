@@ -92,7 +92,7 @@ def avg_amount(table, year):
 
 
 def read_accounting_data():
-    table = data_manager.get_table_from_file("model/accounting/items.csv")
+    table = data_manager.get_table_from_file("accounting/items.csv")
     return table
 
 

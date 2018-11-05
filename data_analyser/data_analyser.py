@@ -8,11 +8,13 @@
 
 # importing everything you need
 import os
-import model.common
-from model.sales import sales
-from model.crm import crm
-from model.sales import sales
-from model.store import store
+import common
+from sales import sales
+from crm import crm
+from sales import sales
+from store import store
+
+
 def start_module():
     """
     Starts this module and displays its menu.

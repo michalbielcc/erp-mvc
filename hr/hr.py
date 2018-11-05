@@ -85,7 +85,7 @@ def get_persons_closest_to_average(table):
 
 
 def read_hr_data():
-    table = data_manager.get_table_from_file("model/hr/persons.csv")
+    table = data_manager.get_table_from_file("hr/persons.csv")
     return table
 
 

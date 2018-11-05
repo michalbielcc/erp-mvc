@@ -85,7 +85,7 @@ def get_average_by_manufacturer(table, manufacturer):
 
 
 def read_store_data():
-    table = data_manager.get_table_from_file("model/store/games.csv")
+    table = data_manager.get_table_from_file("store/games.csv")
     return table
 
 
