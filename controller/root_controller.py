@@ -7,7 +7,7 @@ from controller import accounting_controller
 from controller import sales_controller
 from controller import crm_controller
 from controller import common
-
+from controller import data_analyser_controller
 
 def run():
     options = ["Store manager",
@@ -15,7 +15,8 @@ def run():
                "Inventory manager",
                "Accounting manager",
                "Sales manager",
-               "Customer Relationship Management (CRM)"]
+               "Customer Relationship Management (CRM)",
+               "Data Analyser"]
 
     choice = None
     while choice != "0":
@@ -32,5 +33,7 @@ def run():
             sales_controller.run()
         elif choice == "6":
             crm_controller.run()
+        elif choice == '7':
+            data_analyser_controller.run()
         elif choice == '0':
             terminal_view.print_error_message("Good Bye")

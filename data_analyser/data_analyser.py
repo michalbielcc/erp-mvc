@@ -8,11 +8,9 @@
 
 # importing everything you need
 import os
-from view import terminal_view
 import model.common
 from model.sales import sales
 from model.crm import crm
-
 
 def start_module():
     """
@@ -23,10 +21,6 @@ def start_module():
     Returns:
         None
     """
-
-    # your code
-
-    pass
 
 
 def get_the_last_buyer_name():
