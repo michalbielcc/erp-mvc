@@ -11,7 +11,8 @@ import os
 import model.common
 from model.sales import sales
 from model.crm import crm
-
+from model.sales import sales
+from model.store import store
 def start_module():
     """
     Starts this module and displays its menu.
@@ -30,8 +31,15 @@ def get_the_last_buyer_name():
     Returns:
         Customer name of the last buyer
     """
-
-    # your code
+    dates_list = []
+    for item in store.read_store_data():
+        dates_list.append(item[5])
+        dates_list.append(item[3])
+        dates_list.append(item[5])
+        
+    for i in dates_list:
+        print(i)
+    
 
     pass
 
