@@ -1,23 +1,28 @@
 # Do not modify this file (if you want to modify anyway, contact a mentor before, who will explain why do not modify)
 
 import unittest
-import os
-import data_manager
+from model import data_manager
 # Store module
-from store import store
+from model.store import store
 # Human Resources module
-from hr import hr
+from model.hr import hr
 # Tool manager module
-from inventory import inventory
+from model.inventory import inventory
 # Accounting module
-from accounting import accounting
+from model.accounting import accounting
 # Sales module
-from sales import sales
+from model.sales import sales
 # Customer Relationship Management (CRM) module
-from crm import crm
+from model.crm import crm
 
 
 def compare_lists(tester, expected_list, result_list):
+    if len(expected_list) == 0 and len(result_list) == 0:
+        return
+
+    if len(expected_list) != 0 and len(result_list) == 0:
+        tester.assertListEqual(result_list, expected_list)
+
     for item in result_list:
         tester.assertTrue(item in expected_list)
 
@@ -94,23 +99,23 @@ def check_forbidden_list_functions(tester, file_name):
 class CommonTester(unittest.TestCase):
 
     def test_forbidden_functions(self):
-        check_forbidden_functions(self, "common.py")
+        check_forbidden_functions(self, "model/common.py")
 
 
-class UITester(unittest.TestCase):
+class terminal_viewTester(unittest.TestCase):
 
     def test_forbidden_functions(self):
-        check_forbidden_list_functions(self, "ui.py")
+        check_forbidden_list_functions(self, "view/terminal_view.py")
 
 
 class AccountingTester(unittest.TestCase):
-    data_file = "accounting/items_test.csv"
+    data_file = "model/accounting/items_test.csv"
 
     def test_forbidden_functions(self):
-        check_forbidden_functions(self, "accounting/accounting.py")
+        check_forbidden_functions(self, "model/accounting/accounting.py")
 
-    def test_check_burnin_dates(self):
-        with open("accounting/accounting.py", "r") as file:
+    def test_check_burnt_in_dates(self):
+        with open("model/accounting/accounting.py", "r") as file:
             lines = file.read()
             self.assertEqual(lines.find("2015"), -1)
             self.assertEqual(lines.find("2016"), -1)
@@ -127,15 +132,15 @@ class AccountingTester(unittest.TestCase):
 
 
 class CRMTester(unittest.TestCase):
-    data_file = "crm/customers_test.csv"
+    data_file = "model/crm/customers_test.csv"
 
     def test_forbidden_functions(self):
-        check_forbidden_functions(self, "crm/crm.py")
+        check_forbidden_functions(self, "model/crm/crm.py")
 
     def test_get_longest_name_id(self):
         table = data_manager.get_table_from_file(self.data_file)
         result = crm.get_longest_name_id(table)
-        self.assertEqual(result, "kH14Ju#&")
+        self.assertEqual(result, "kH94Ju#&")
 
     def test_get_subscribed_emails(self):
         table = data_manager.get_table_from_file(self.data_file)
@@ -145,13 +150,13 @@ class CRMTester(unittest.TestCase):
 
 
 class HRTester(unittest.TestCase):
-    data_file = "hr/persons_test.csv"
+    data_file = "model/hr/persons_test.csv"
 
     def test_forbidden_functions(self):
-        check_forbidden_functions(self, "hr/hr.py")
+        check_forbidden_functions(self, "model/hr/hr.py")
 
     def test_check_using_datetime(self):
-        with open("hr/hr.py", "r") as file:
+        with open("model/hr/hr.py", "r") as file:
             lines = file.read()
             self.assertEqual(lines.find("datetime"), -1)
 
@@ -169,13 +174,13 @@ class HRTester(unittest.TestCase):
 
 
 class SalesTester(unittest.TestCase):
-    data_file = "sales/sales_test.csv"
+    data_file = "model/sales/sales_test.csv"
 
     def test_forbidden_functions(self):
-        check_forbidden_functions(self, "sales/sales.py")
+        check_forbidden_functions(self, "model/sales/sales.py")
 
     def test_check_using_datetime(self):
-        with open("sales/sales.py", "r") as file:
+        with open("model/sales/sales.py", "r") as file:
             lines = file.read()
             self.assertEqual(lines.find("datetime"), -1)
 
@@ -192,10 +197,10 @@ class SalesTester(unittest.TestCase):
 
 
 class StoreTester(unittest.TestCase):
-    data_file = "store/games_test.csv"
+    data_file = "model/store/games_test.csv"
 
     def test_forbidden_functions(self):
-        check_forbidden_functions(self, "store/store.py")
+        check_forbidden_functions(self, "model/store/store.py")
 
     def test_get_counts_by_manufacturers(self):
         table = data_manager.get_table_from_file(self.data_file)
@@ -210,10 +215,10 @@ class StoreTester(unittest.TestCase):
 
 
 class InventoryTester(unittest.TestCase):
-    data_file = "inventory/inventory_test.csv"
+    data_file = "model/inventory/inventory_test.csv"
 
     def test_forbidden_functions(self):
-        check_forbidden_functions(self, "inventory/inventory.py")
+        check_forbidden_functions(self, "model/inventory/inventory.py")
 
     def test_get_available_items(self):
         table = data_manager.get_table_from_file(self.data_file)
@@ -227,12 +232,10 @@ class InventoryTester(unittest.TestCase):
         result = inventory.get_average_durability_by_manufacturers(table)
         self.assertEqual(result, expected)
 
-class DataAnalyserTester(unittest.TestCase):
-    def test_forbidden_functions(self):
-        check_forbidden_functions(self, "data_analyser/data_analyser.py")
 
 def main():
     unittest.main()
+
 
 if __name__ == '__main__':
     main()
