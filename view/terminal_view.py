@@ -45,9 +45,8 @@ def print_table(table, title_list):
             print(f'{element:^{lengths[i]}}|', end='')
         print()
         if j < len(table) - 1:
-            print('|' + x * '-' + '|')
-        else:
-            print('└' + x * '-' + '┘')
+            print('|' + x * '-' + '|')        
+    print('└' + x * '-' + '┘')
 
 
 def get_longest(lengths, table):
