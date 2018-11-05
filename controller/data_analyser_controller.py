@@ -15,9 +15,11 @@ def run():
     while choice != '0':
         choice = terminal_view.get_submenu_choice(options)
         if choice == '1':
-            data_analyser.get_the_last_buyer_name()
+            last_buyer_name = data_analyser.get_the_last_buyer_name()
+            terminal_view.print_result(last_buyer_name, 'Name of last buyer is: ')
         elif choice == '2':
-            get_the_last_buyer_id()
+            last_buyer_id = data_analyser.get_the_last_buyer_id()
+            terminal_view.print_result(last_buyer_id, "Id of last buyer is: ")
         elif choice == '3':
             data_analyser.get_the_buyer_name_spent_most_and_the_money_spent()
         elif choice == '4':

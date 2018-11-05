@@ -105,7 +105,7 @@ class CommonTester(unittest.TestCase):
 class UITester(unittest.TestCase):
 
     def test_forbidden_functions(self):
-        check_forbidden_list_functions(self, "ui.py")
+        check_forbidden_list_functions(self, "view/terminal_view.py")
 
 
 class AccountingTester(unittest.TestCase):

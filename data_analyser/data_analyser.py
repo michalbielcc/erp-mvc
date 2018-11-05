@@ -33,18 +33,8 @@ def get_the_last_buyer_name():
     Returns:
         Customer name of the last buyer
     """
-    dates_list = []
-    for item in store.read_store_data():
-        dates_list.append(item[5])
-        dates_list.append(item[3])
-        dates_list.append(item[4])
-        
-    for i in dates_list:
-        print(i)
-    
-
-    pass
-
+    return crm.get_name_by_id(get_the_last_buyer_id())
+  
 
 def get_the_last_buyer_id():
     """
@@ -54,9 +44,19 @@ def get_the_last_buyer_id():
         Customer id of the last buyer
     """
 
-    # your code
+    dates_list = []
+    index = 0
 
-    pass
+    for item in sales.read_sales_data():
+        dates_list.append(item)
+
+    for i in dates_list:
+        if int(''.join(i[5]+i[3]+i[4])) > index:
+            index = int(''.join(i[5]+i[3]+i[4]))
+    
+    for i in dates_list:
+        if int(''.join(i[5]+i[3]+i[4])) == index:
+            return i[6]
 
 
 def get_the_buyer_name_spent_most_and_the_money_spent():
