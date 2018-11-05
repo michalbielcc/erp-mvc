@@ -180,3 +180,20 @@ def get_the_most_frequent_buyers_ids(num=1):
         amount = 0
 
     return output[0:num]
+
+def get_customers_who_did_not_buy_anything():
+    amount = 0
+    data = []
+    output = []
+
+    for record in crm.read_crm_data():
+        for item in sales.read_sales_data():
+            if record[0] == item[6]:
+                amount += 1
+        data.append([record[1], amount])
+        amount = 0
+
+    for item in data:
+        if item[1] == 0:
+            output.append(item[0])
+    return output
