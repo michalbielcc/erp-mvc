@@ -107,7 +107,6 @@ def add_id(table, inputs):
 
 
 def get_name_by_id(id):
-
     """
     Reads the table with the help of the data_manager module.
     Returns the name (str) of the customer with the given id (str) on None om case of non-existing id.
@@ -119,13 +118,17 @@ def get_name_by_id(id):
         str the name of the customer
     """
 
-    # your code
+    id_index = 0
+    name_index = 1
 
-    pass
+    table = read_crm_data()
+    for record in table:
+        if id == record[id_index]:
+            return record[name_index]
+    return None
 
 
 def get_name_by_id_from_table(table, id):
-
     """
     Returns the name (str) of the customer with the given id (str) on None om case of non-existing id.
 
@@ -136,8 +139,10 @@ def get_name_by_id_from_table(table, id):
     Returns:
         str the name of the customer
     """
+    id_index = 0
+    name_index = 1
 
-    # your code
-
-    pass
-
+    for record in table:
+        if id == record[id_index]:
+            return record[name_index]
+    return None
