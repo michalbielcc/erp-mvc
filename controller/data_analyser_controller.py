@@ -27,7 +27,8 @@ def run():
             biggest_spender_id = data_analyser.get_the_buyer_id_spent_most_and_the_money_spent()
             terminal_view.print_result(biggest_spender_id, 'Id of biggest spender and the amount is:')
         elif choice == '5':
-            data_analyser.get_the_most_frequent_buyers_names(num=1)
+            most_frequent_buyers = data_analyser.get_the_most_frequent_buyers_names(num=1)
+            terminal_view.print_result(most_frequent_buyers, 'Names of most frequent buyer(s) are:')
         elif choice == '6':
             data_analyser.get_the_most_frequent_buyers_ids(num=1)
         elif choice == '7':

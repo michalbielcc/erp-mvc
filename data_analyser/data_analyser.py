@@ -121,10 +121,28 @@ def get_the_most_frequent_buyers_names(num=1):
     Returns:
         Ordered list of tuples of customer names and num of sales
     """
+    amount = 0
+    data = []
+    output = []
 
-    # your code
+    for record in crm.read_crm_data():
+        for item in sales.read_sales_data():
+            if record[0] == item[6]:
+                amount += 1
+        data.append([record[1], amount])
+        amount = 0
 
-    pass
+    for i in range(num):
+        for item in data:
+            if item[1] > amount:
+                amount = item[1]
+        for item in data:
+            if amount == item[1]:
+                output.append(tuple(item))
+                data.remove(item)
+        amount = 0
+
+    return output[0:num]
 
 
 def get_the_most_frequent_buyers_ids(num=1):
