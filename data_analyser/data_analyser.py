@@ -79,8 +79,7 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
         if curent_amount > highest_amount:
             highest_amount = curent_amount
             name = record[1]
-            curent_amount = 0
-    
+            curent_amount = 0 
     return (name, highest_amount)
 
 
@@ -94,9 +93,19 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
         Tuple of customer id and the sum the customer spent
     """
 
-    # your code
+    curent_amount = 0
+    highest_amount = 0
+    customer_id = ''
 
-    pass
+    for record in crm.read_crm_data():
+        for item in sales.read_sales_data():
+            if record[0] == item[6]:
+                curent_amount += int(item[2])
+        if curent_amount > highest_amount:
+            highest_amount = curent_amount
+            customer_id = record[0]
+            curent_amount = 0 
+    return (customer_id, highest_amount)
 
 
 def get_the_most_frequent_buyers_names(num=1):

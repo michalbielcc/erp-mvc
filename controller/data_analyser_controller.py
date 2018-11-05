@@ -22,9 +22,10 @@ def run():
             terminal_view.print_result(last_buyer_id, "Id of last buyer is:")
         elif choice == '3':
             biggest_spender_name = data_analyser.get_the_buyer_name_spent_most_and_the_money_spent()
-            terminal_view.print_result(biggest_spender_name, 'Name of biggest spender is:')
+            terminal_view.print_result(biggest_spender_name, 'Name of biggest spender and the amount is:')
         elif choice == '4':
-            data_analyser.get_the_buyer_id_spent_most_and_the_money_spent()
+            biggest_spender_id = data_analyser.get_the_buyer_id_spent_most_and_the_money_spent()
+            terminal_view.print_result(biggest_spender_id, 'Id of biggest spender and the amount is:')
         elif choice == '5':
             data_analyser.get_the_most_frequent_buyers_names(num=1)
         elif choice == '6':
