@@ -1,5 +1,5 @@
 # everything you'll need is imported:
-from model.store import store
+from store import store
 from view import terminal_view
 from controller import common
 
@@ -33,18 +33,18 @@ def run():
             if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = store.add_id(table, inputs)
                 table = store.add(table, new_record)
-                common.export_to_file(table, 'model/store/games.csv')
+                common.export_to_file(table, 'store/games.csv')
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Edit Fields")
             types = [str, str, int, int]
             if common.check_input(inputs, types) and check_fields(inputs):
                 table = store.update(table, id_, inputs)
-                common.export_to_file(table, 'model/store/games.csv')
+                common.export_to_file(table, 'store/games.csv')
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = store.remove(table, id_)
-            common.export_to_file(table, 'model/store/games.csv')
+            common.export_to_file(table, 'store/games.csv')
         elif choice == "5":
             counts_by_manufacturers = store.get_counts_by_manufacturers(table)
             terminal_view.print_result(counts_by_manufacturers, "Game count by manufacturer: ")

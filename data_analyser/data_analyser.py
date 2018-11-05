@@ -35,7 +35,7 @@ def get_the_last_buyer_name():
     for item in store.read_store_data():
         dates_list.append(item[5])
         dates_list.append(item[3])
-        dates_list.append(item[5])
+        dates_list.append(item[4])
         
     for i in dates_list:
         print(i)
