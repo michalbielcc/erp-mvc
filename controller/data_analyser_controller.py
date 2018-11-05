@@ -27,10 +27,11 @@ def run():
             biggest_spender_id = data_analyser.get_the_buyer_id_spent_most_and_the_money_spent()
             terminal_view.print_result(biggest_spender_id, 'Id of biggest spender and the amount is:')
         elif choice == '5':
-            most_frequent_buyers = data_analyser.get_the_most_frequent_buyers_names(num=1)
-            terminal_view.print_result(most_frequent_buyers, 'Names of most frequent buyer(s) are:')
+            most_frequent_buyers_names = data_analyser.get_the_most_frequent_buyers_names(num=1)
+            terminal_view.print_result(most_frequent_buyers_names, 'Names of most frequent buyer(s) are:')
         elif choice == '6':
-            data_analyser.get_the_most_frequent_buyers_ids(num=1)
+            most_frequent_buyers_ids = data_analyser.get_the_most_frequent_buyers_ids(num=1)
+            terminal_view.print_result(most_frequent_buyers_ids, 'Names of most frequent buyer(s) are:')
         elif choice == '7':
             data_analyser.get_customers_who_did_not_buy_anything()
         elif choice != '0':
