@@ -81,6 +81,9 @@ def print_result(result, label):
         for i in result:
             print(i)
 
+    if type(result) is tuple:
+        print(label, result)
+
     if type(result) is dict:
         for key, value in result.items():
             print(f'{key}: {value}')
