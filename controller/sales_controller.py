@@ -26,18 +26,20 @@ def run():
     while choice != "0":
         choice = terminal_view.get_submenu_choice(options)
         if choice == "1":
-            terminal_view.print_table(table, ["Id", "Title", "Price", "Month", "Day", "Year"])
+            terminal_view.print_table(table, ["Id", "Title", "Price", "Month", "Day", "Year", "Customer Id"])
         elif choice == "2":
-            inputs = terminal_view.get_inputs(["Title", "Price", "Month", "Day", "Year"], "Add new item to sales:")
-            types = [str, int, int, int, int]
+            inputs = terminal_view.get_inputs(["Title", "Price", "Month", "Day", "Year",
+                                               "Customer Id"], "Add new item to sales:")
+            types = [str, int, int, int, int, str]
             if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = sales.add_id(table, inputs)
                 table = sales.add(table, new_record)
                 common.export_to_file(table, 'sales/sales.csv')
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
-            inputs = terminal_view.get_inputs(["Title", "Price", "Month", "Day", "Year"], "Edit Fields: ")
-            types = [str, int, int, int, int]
+            inputs = terminal_view.get_inputs(
+                ["Title", "Price", "Month", "Day", "Year", "Customer Id"], "Edit Fields: ")
+            types = [str, int, int, int, int, str]
             if common.check_input(inputs, types) and check_fields(inputs):
                 table = sales.update(table, id_, inputs)
                 common.export_to_file(table, 'sales/sales.csv')
@@ -50,6 +52,35 @@ def run():
             terminal_view.print_result(cheapest_items_id, "Cheapest item's id: ")
         elif choice == "6":
             sold_between(table)
+        elif choice == '7':
+            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record: ")[0]
+            item_title = sales.get_title_by_id_from_table(table, id_)
+            terminal_view.print_result(item_title, f"Title of game with id {id_}:")
+        elif choice == '8':
+            sold_last_id = sales.get_item_id_sold_last_from_table(table)
+            terminal_view.print_result(sold_last_id, "Id of game sold last: ")
+        elif choice == '9':
+            sold_last_title = sales.get_item_title_sold_last_from_table(table)
+            terminal_view.print_result(sold_last_title, "Title of game sold last: ")
+        elif choice == '10':
+            # get_the_sum_of_prices_from_table(table, item_ids)
+            pass
+        elif choice == '11':
+            sale_id = terminal_view.get_inputs(["Id"], "Enter id of the record: ")[0]
+            customer_id = sales.get_customer_id_by_sale_id_from_table(table, sale_id)
+            terminal_view.print_result(customer_id, "Customer id: ")
+        elif choice == '12':
+            pass
+        elif choice == '50':
+            get_num_of_sales_per_customer_ids = sales.get_all_sales_ids_for_customer_ids()
+            terminal_view.print_result(get_num_of_sales_per_customer_ids, 'Get all sales Ids for customer Ids:')
+        elif choice == '51':
+            get_all_sales_ids_for_customer_ids_from_table = sales.get_all_sales_ids_for_customer_ids_form_table(table)
+            terminal_view.print_result(get_all_sales_ids_for_customer_ids_from_table,
+                                       'Get all sales Ids for customer Ids from table:')
+        elif choice == '60:
+            get_num_of_sales_per_customer_ids = sales.get_num_of_sales_per_customer_ids()
+            terminal_view.print_result(get_num_of_sales_per_customer_ids, 'List of sales per customer Ids:')
         elif choice != '0':
             terminal_view.print_error_message("There is no such choice.")
 

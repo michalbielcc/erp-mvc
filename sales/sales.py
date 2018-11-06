@@ -13,6 +13,7 @@ Data table structure:
 # everything you'll need is imported:
 import data_manager
 import common
+from crm import crm
 
 
 def add(table, record):
@@ -124,11 +125,10 @@ def add_id(table, inputs):
     record = [new_id] + inputs
     return record
 
-#======================================
+# ======================================
 
 
 def get_title_by_id(id):
-
     """
     Reads the table with the help of the data_manager module.
     Returns the title (str) of the item with the given id (str) on None om case of non-existing id.
@@ -146,7 +146,6 @@ def get_title_by_id(id):
 
 
 def get_title_by_id_from_table(table, id):
-
     """
     Returns the title (str) of the item with the given id (str) on None om case of non-existing id.
 
@@ -220,10 +219,8 @@ def get_the_sum_of_prices(item_ids):
     Returns:
         (number) the sum of the items' prices
     """
-
-    # your code
-
-    pass
+    table = read_sales_data()
+    return get_the_sum_of_prices_from_table(table, item_ids)
 
 
 def get_the_sum_of_prices_from_table(table, item_ids):
@@ -237,10 +234,14 @@ def get_the_sum_of_prices_from_table(table, item_ids):
     Returns:
         (number) the sum of the items' prices
     """
+    id_index = 0
+    price_index = 2
+    price_sum = 0
 
-    # your code
-
-    pass
+    for record in table:
+        if record[id_index] in item_ids:
+            price_sum += int(record[price_index])
+    return price_sum
 
 
 def get_customer_id_by_sale_id(sale_id):
@@ -253,10 +254,8 @@ def get_customer_id_by_sale_id(sale_id):
     Returns:
          customer_id that belongs to the given sale id
     """
-
-    # your code
-
-    pass
+    table = read_sales_data()
+    return get_customer_id_by_sale_id_from_table(table, sale_id)
 
 
 def get_customer_id_by_sale_id_from_table(table, sale_id):
@@ -269,10 +268,12 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
     Returns:
          customer_id that belongs to the given sale id
     """
-
-    # your code
-
-    pass
+    id_index = 0
+    customer_index = 6
+    for record in table:
+        if record[id_index] == sale_id:
+            return record[customer_index]
+    return None
 
 
 def get_all_customer_ids():
@@ -283,9 +284,8 @@ def get_all_customer_ids():
          set of customer_ids that are present in the table
     """
 
-    # your code
-
-    pass
+    table = read_sales_data()
+    return get_all_customer_ids_from_table(table)
 
 
 def get_all_customer_ids_from_table(table):
@@ -296,10 +296,8 @@ def get_all_customer_ids_from_table(table):
     Returns:
          set of customer_ids that are present in the table
     """
-
-    # your code
-
-    pass
+    customer_index = 6
+    return set(list(zip(*table))[customer_index])
 
 
 def get_all_sales_ids_for_customer_ids():
@@ -313,10 +311,8 @@ def get_all_sales_ids_for_customer_ids():
          (dict of (key, value): (customer_id, (list) sale_ids)) where the sale_ids list contains
          all the sales id belong to the given customer_id
     """
-
-    # your code
-
-    pass
+    table = crm.read_crm_data()
+    return get_all_sales_ids_for_customer_ids_form_table(table)
 
 
 def get_all_sales_ids_for_customer_ids_form_table(table):
@@ -331,10 +327,18 @@ def get_all_sales_ids_for_customer_ids_form_table(table):
          (dict of (key, value): (customer_id, (list) sale_ids)) where the sale_ids list contains
          all the sales id belong to the given customer_id
     """
-
-    # your code
-
-    pass
+    table = crm.read_crm_data()
+    output = {}
+    for record in table:
+        customer_id = ''
+        sales_ids = []
+        for item in read_sales_data():
+            if record[0] == item[6]:
+                customer_id = record[0]
+                sales_ids.append(item[0])
+        if sales_ids:
+            output[customer_id] = sales_ids
+    return output
 
 
 def get_num_of_sales_per_customer_ids():
@@ -346,10 +350,8 @@ def get_num_of_sales_per_customer_ids():
      Returns:
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
-
-    # your code
-
-    pass
+    table = read_sales_data()
+    return get_num_of_sales_per_customer_ids_from_table(table)
 
 
 def get_num_of_sales_per_customer_ids_from_table(table):
@@ -363,6 +365,17 @@ def get_num_of_sales_per_customer_ids_from_table(table):
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
 
-    # your code
+    amount = 0
+    data = []
+    output = {}
 
-    pass
+    for record in crm.read_crm_data():
+        for item in table:
+            if record[0] == item[6]:
+                amount += 1
+        data.append([record[0], amount])
+        amount = 0
+    for item in data:
+        if item[1] > 0:
+            output[item[0]] = item[1]
+    return output
