@@ -37,16 +37,16 @@ def print_table(table, title_list):
 
     x += len(title_list) - 1
 
-    print('┌' + '-' * x + '┐')
+    prGreen('┌' + '-' * x + '┐')
 
     for j, record in enumerate(table):
-        print('|', end='')
+        prGreen('|', end='')
         for i, element in enumerate(record):
-            print(f'{element:^{lengths[i]}}|', end='')
+            prGreen(f'{element:^{lengths[i]}}|', end='')
         print()
         if j < len(table) - 1:
-            print('|' + x * '-' + '|')
-    print('└' + x * '-' + '┘')
+            prGreen('|' + x * '-' + '|')
+    prGreen('└' + x * '-' + '┘')
 
 
 def get_longest(lengths, table):
@@ -69,25 +69,17 @@ def print_result(result, label):
         None: This function doesn't return anything it only prints to console.
     """
     type_ = type(result)
-    if type_ is int:
-        print(label, result)
+    if type_ is int or type_ is str or type_ is float: 
+        special_print(f'{label} {result}')
 
-    if type_ is str:
-        print(label, result)
-
-    if type_ is float:
-        print(label, result)
-
-    if type_ is list or type_ is set:
+    if type_ is list or type_ is set or type_ is tuple:
+        special_print(label)
         for i in result:
-            print(i)
-
-    if type_ is tuple:
-        print(label, result)
+            special_print(i)
 
     if type_ is dict:
         for key, value in result.items():
-            print(f'{key}: {value}')
+            special_print(f'{key}: {value}')
 
 
 def print_menu(title, list_options, exit_message):
@@ -110,7 +102,7 @@ def print_menu(title, list_options, exit_message):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-    print(title)
+    print_blue_underscore(title)
     for i, element in enumerate(list_options):
         print(f'\t({i+1}) {element}')
     print((f'\t(0) {exit_message}'))
@@ -168,4 +160,20 @@ def print_error_message(message):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-    print('\n' + message + '\n')
+    prRed('\n' + message + '\n')
+
+
+def prRed(skk):
+    print("\033[91m {}\033[00m" .format(skk))
+
+
+def prGreen(skk, sep=' ',end='\n'):
+    print("\033[38:2:1:125:21m\033[1m{}\033[00m" .format(skk),sep=sep, end=end) 
+
+
+def print_blue_underscore(text):
+    print(f'\033[4m\033[38:2:0:7:112m{text}\033[00m')
+
+
+def special_print(text, sep=' ',end='\n'):
+    print(f'\033[38:2:131:20:8m{text}\033[0m')

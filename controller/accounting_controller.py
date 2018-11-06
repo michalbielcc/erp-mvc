@@ -56,11 +56,14 @@ def run():
 
 
 def average_profit_for_year(table):
-    year = int(terminal_view.get_inputs(["Year"], "Enter a year:")[0])
     try:
+        year = terminal_view.get_inputs(["Year"], "Enter a year:")[0]
+        check_year(year)
         average_profit = accounting.avg_amount(table, year)
     except ZeroDivisionError:
         terminal_view.print_error_message("There is no such year")
+    except ValueError as e:
+        terminal_view.print_error_message(str(e))
     else:
         terminal_view.print_result(average_profit, f"Average profit for year {year}: ")
 
