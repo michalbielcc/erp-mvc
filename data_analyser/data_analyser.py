@@ -66,14 +66,18 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
     """   
     amount_spent = 0
     name = ''
+    id = 0
+    id2 = 6
+    price = 2
+    customer_name = 1
     for record in crm.read_crm_data():
         amount = 0 
         for item in sales.read_sales_data():
-            if record[0] == item[6]:
-                amount += int(item[2])
+            if record[id] == item[id2]:
+                amount += int(item[price])
         if amount > amount_spent:
             amount_spent = amount
-            name = record[1]     
+            name = record[customer_name]     
     return (name, amount_spent)
 
 
@@ -87,15 +91,18 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
         Tuple of customer id and the sum the customer spent
     """
     amount_spent = 0
-    customer_id = ''
+    name = ''
+    id = 0
+    id2 = 6
+    price = 2
     for record in crm.read_crm_data():
-        amount = 0 
+        amount = 0
         for item in sales.read_sales_data():
-            if record[0] == item[6]:
+            if record[id] == item[id2]:
                 amount += int(item[2])
         if amount > amount_spent:
             amount_spent = amount
-            customer_id = record[0]
+            customer_id = record[id]
     return (customer_id, amount_spent)
 
 
@@ -114,20 +121,24 @@ def get_the_most_frequent_buyers_names(num=1):
     """
     data = []
     output = []
+    id = 0
+    id2 = 6
+    name = 1
+    how_many = 1
     for record in crm.read_crm_data():
         amount = 0
         for item in sales.read_sales_data():
-            if record[0] == item[6]:
+            if record[id] == item[id2]:
                 amount += 1
-        data.append([record[1], amount])
+        data.append([record[name], amount])
 
     for i in range(num):
         amount = 0
         for item in data:
-            if item[1] > amount:
-                amount = item[1]
+            if item[how_many] > amount:
+                amount = item[how_many]
         for item in data:
-            if amount == item[1]:
+            if amount == item[how_many]:
                 output.append(tuple(item))
                 data.remove(item)
     return output[0:num]
@@ -148,20 +159,23 @@ def get_the_most_frequent_buyers_ids(num=1):
     """
     data = []
     output = []
+    id = 0
+    id2 = 6
+    how_many = 1
     for record in crm.read_crm_data():
         amount = 0
         for item in sales.read_sales_data():
-            if record[0] == item[6]:
+            if record[id] == item[id2]:
                 amount += 1
-        data.append([record[0], amount])
+        data.append([record[id], amount])
         
     for i in range(num):
         amount = 0
         for item in data:
-            if item[1] > amount:
-                amount = item[1]
+            if item[how_many] > amount:
+                amount = item[how_many]
         for item in data:
-            if amount == item[1]:
+            if amount == item[how_many]:
                 output.append(tuple(item))
                 data.remove(item)
     return output[0:num]
@@ -170,14 +184,19 @@ def get_the_most_frequent_buyers_ids(num=1):
 def get_customers_who_did_not_buy_anything():
     data = []
     output = []
+    id = 0
+    id2 = 6
+    name = 1
+    name2 = 0
+    how_many = 1
     for record in crm.read_crm_data():
         amount = 0
         for item in sales.read_sales_data():
-            if record[0] == item[6]:
+            if record[id] == item[id2]:
                 amount += 1
-        data.append([record[1], amount])
+        data.append([record[name], amount])
 
     for item in data:
-        if item[1] == 0:
-            output.append(item[0])
+        if item[how_many] == 0:
+            output.append(item[name2])
     return output
