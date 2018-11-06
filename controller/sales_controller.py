@@ -78,7 +78,7 @@ def run():
             get_all_sales_ids_for_customer_ids_from_table = sales.get_all_sales_ids_for_customer_ids_form_table(table)
             terminal_view.print_result(get_all_sales_ids_for_customer_ids_from_table,
                                        'Get all sales Ids for customer Ids from table:')
-        elif choice == '60:
+        elif choice == '60':
             get_num_of_sales_per_customer_ids = sales.get_num_of_sales_per_customer_ids()
             terminal_view.print_result(get_num_of_sales_per_customer_ids, 'List of sales per customer Ids:')
         elif choice != '0':

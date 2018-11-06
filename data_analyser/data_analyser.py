@@ -42,19 +42,15 @@ def get_the_last_buyer_id():
 
     Returns:
         Customer id of the last buyer
+
+    int(''.join(i[5]+i[3]+i[4])) ===> is integer of date in format: YYYYMMDD
     """
-
-    dates_list = []
     index = 0
-
-    for item in sales.read_sales_data():
-        dates_list.append(item)
-
-    for i in dates_list:
+    for i in sales.read_sales_data():
         if int(''.join(i[5]+i[3]+i[4])) > index:
             index = int(''.join(i[5]+i[3]+i[4]))
     
-    for i in dates_list:
+    for i in sales.read_sales_data():
         if int(''.join(i[5]+i[3]+i[4])) == index:
             return i[6]
 
@@ -68,19 +64,17 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
    Returns:
         Tuple of customer name and the sum the customer spent
     """   
-    curent_amount = 0
-    highest_amount = 0
+    amount_spent = 0
     name = ''
-
     for record in crm.read_crm_data():
+        amount = 0 
         for item in sales.read_sales_data():
             if record[0] == item[6]:
-                curent_amount += int(item[2])
-        if curent_amount > highest_amount:
-            highest_amount = curent_amount
-            name = record[1]
-            curent_amount = 0 
-    return (name, highest_amount)
+                amount += int(item[2])
+        if amount > amount_spent:
+            amount_spent = amount
+            name = record[1]     
+    return (name, amount_spent)
 
 
 def get_the_buyer_id_spent_most_and_the_money_spent():
@@ -92,20 +86,17 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
    Returns:
         Tuple of customer id and the sum the customer spent
     """
-
-    curent_amount = 0
-    highest_amount = 0
+    amount_spent = 0
     customer_id = ''
-
     for record in crm.read_crm_data():
+        amount = 0 
         for item in sales.read_sales_data():
             if record[0] == item[6]:
-                curent_amount += int(item[2])
-        if curent_amount > highest_amount:
-            highest_amount = curent_amount
+                amount += int(item[2])
+        if amount > amount_spent:
+            amount_spent = amount
             customer_id = record[0]
-            curent_amount = 0 
-    return (customer_id, highest_amount)
+    return (customer_id, amount_spent)
 
 
 def get_the_most_frequent_buyers_names(num=1):
@@ -121,18 +112,17 @@ def get_the_most_frequent_buyers_names(num=1):
     Returns:
         Ordered list of tuples of customer names and num of sales
     """
-    amount = 0
     data = []
     output = []
-
     for record in crm.read_crm_data():
+        amount = 0
         for item in sales.read_sales_data():
             if record[0] == item[6]:
                 amount += 1
         data.append([record[1], amount])
-        amount = 0
 
     for i in range(num):
+        amount = 0
         for item in data:
             if item[1] > amount:
                 amount = item[1]
@@ -140,8 +130,6 @@ def get_the_most_frequent_buyers_names(num=1):
             if amount == item[1]:
                 output.append(tuple(item))
                 data.remove(item)
-        amount = 0
-
     return output[0:num]
 
 
@@ -158,18 +146,17 @@ def get_the_most_frequent_buyers_ids(num=1):
     Returns:
         Ordered list of tuples of customer ids and num of sales
     """
-    amount = 0
     data = []
     output = []
-
     for record in crm.read_crm_data():
+        amount = 0
         for item in sales.read_sales_data():
             if record[0] == item[6]:
                 amount += 1
         data.append([record[0], amount])
-        amount = 0
-
+        
     for i in range(num):
+        amount = 0
         for item in data:
             if item[1] > amount:
                 amount = item[1]
@@ -177,21 +164,18 @@ def get_the_most_frequent_buyers_ids(num=1):
             if amount == item[1]:
                 output.append(tuple(item))
                 data.remove(item)
-        amount = 0
-
     return output[0:num]
 
+
 def get_customers_who_did_not_buy_anything():
-    amount = 0
     data = []
     output = []
-
     for record in crm.read_crm_data():
+        amount = 0
         for item in sales.read_sales_data():
             if record[0] == item[6]:
                 amount += 1
         data.append([record[1], amount])
-        amount = 0
 
     for item in data:
         if item[1] == 0:
