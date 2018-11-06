@@ -45,7 +45,7 @@ def print_table(table, title_list):
             print(f'{element:^{lengths[i]}}|', end='')
         print()
         if j < len(table) - 1:
-            print('|' + x * '-' + '|')        
+            print('|' + x * '-' + '|')
     print('└' + x * '-' + '┘')
 
 
@@ -68,23 +68,24 @@ def print_result(result, label):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-    if type(result) is int:
+    type_ = type(result)
+    if type_ is int:
         print(label, result)
 
-    if type(result) is str:
+    if type_ is str:
         print(label, result)
 
-    if type(result) is float:
+    if type_ is float:
         print(label, result)
 
-    if type(result) is list:
+    if type_ is list or type_ is set:
         for i in result:
             print(i)
 
-    if type(result) is tuple:
+    if type_ is tuple:
         print(label, result)
 
-    if type(result) is dict:
+    if type_ is dict:
         for key, value in result.items():
             print(f'{key}: {value}')
 

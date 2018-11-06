@@ -19,7 +19,16 @@ def run():
                "Update",
                "Delete",
                "Id of the cheapest item",
-               "Sold between dates"]
+               "Sold between dates",
+               "Title by Id",
+               "Last sold game id",
+               "Last sold game title",
+               "Sum price by id's (not implemented)",
+               "Customer id by sale id",
+               "All customer id's",
+               "Sales id's by customer id",
+               "Number of sales per customer"
+               ]
 
     table = sales.read_sales_data()
     choice = None
@@ -70,17 +79,14 @@ def run():
             customer_id = sales.get_customer_id_by_sale_id_from_table(table, sale_id)
             terminal_view.print_result(customer_id, "Customer id: ")
         elif choice == '12':
-            pass
-        elif choice == '50':
-            get_num_of_sales_per_customer_ids = sales.get_all_sales_ids_for_customer_ids()
-            terminal_view.print_result(get_num_of_sales_per_customer_ids, 'Get all sales Ids for customer Ids:')
-        elif choice == '51':
-            get_all_sales_ids_for_customer_ids_from_table = sales.get_all_sales_ids_for_customer_ids_form_table(table)
-            terminal_view.print_result(get_all_sales_ids_for_customer_ids_from_table,
-                                       'Get all sales Ids for customer Ids from table:')
-        elif choice == '60:
-            get_num_of_sales_per_customer_ids = sales.get_num_of_sales_per_customer_ids()
-            terminal_view.print_result(get_num_of_sales_per_customer_ids, 'List of sales per customer Ids:')
+            all_customer_ids = sales.get_all_customer_ids_from_table(table)
+            terminal_view.print_result(all_customer_ids, "All customer id's: ")
+        elif choice == '13':
+            all_sales_ids = sales.get_all_sales_ids_for_customer_ids_form_table(table)
+            terminal_view.print_result(all_sales_ids, "All sales id's by customer id's: ")
+        elif choice == '14':
+            num_of_sales = sales.get_num_of_sales_per_customer_ids_from_table(table)
+            terminal_view.print_result(num_of_sales, "Number of sales per customer id: ")
         elif choice != '0':
             terminal_view.print_error_message("There is no such choice.")
 
