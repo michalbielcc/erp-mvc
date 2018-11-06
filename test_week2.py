@@ -152,7 +152,7 @@ class Week2DataAnalyserTester(unittest.TestCase):
         self.assertEqual(result, expected)
 
         result = data_analyser.get_the_most_frequent_buyers_names(2)
-        expected = [("Missy Stoney", 11), ("Sadye Hession", 8)]
+        expected = [("Missy Stoney", 11), ("Sadye Hession", 7)]
         self.assertEqual(result, expected)
 
     def test_week2_data_analyser_get_the_most_frequent_buyers_ids(self):
@@ -161,7 +161,7 @@ class Week2DataAnalyserTester(unittest.TestCase):
         self.assertEqual(result, expected)
 
         result = data_analyser.get_the_most_frequent_buyers_ids(2)
-        expected = [("jH34Jk#&", 11), ("kH14Jt#&", 8)]
+        expected = [("jH34Jk#&", 11), ("kH14Jt#&", 7)]
         self.assertEqual(result, expected)
 
 
