@@ -3,9 +3,7 @@
 # Has no own datastructure but uses other modules.
 # Avoud using the database (ie. .csv files) of other modules directly.
 # Use the functions of the modules instead.
-
 # todo: importing everything you need
-
 # importing everything you need
 import os
 import common
@@ -13,17 +11,6 @@ from sales import sales
 from crm import crm
 from sales import sales
 from store import store
-
-
-def start_module():
-    """
-    Starts this module and displays its menu.
-    User can access default special features from here.
-    User can go back to main menu from here.
-
-    Returns:
-        None
-    """
 
 
 def get_the_last_buyer_name():

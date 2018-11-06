@@ -329,13 +329,16 @@ def get_all_sales_ids_for_customer_ids_form_table(table):
     """
     table = crm.read_crm_data()
     output = {}
+    id = 0
+    id2 = 6
+    product_id = 0
     for record in table:
         customer_id = ''
         sales_ids = []
         for item in read_sales_data():
-            if record[0] == item[6]:
-                customer_id = record[0]
-                sales_ids.append(item[0])
+            if record[id] == item[id2]:
+                customer_id = record[id]
+                sales_ids.append(item[product_id])
         if sales_ids:
             output[customer_id] = sales_ids
     return output
@@ -364,18 +367,20 @@ def get_num_of_sales_per_customer_ids_from_table(table):
      Returns:
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
-
     amount = 0
     data = []
     output = {}
-
+    id = 0
+    id2 = 6
+    product_id = 0
+    how_many = 1
     for record in crm.read_crm_data():
         for item in table:
-            if record[0] == item[6]:
+            if record[id] == item[id2]:
                 amount += 1
-        data.append([record[0], amount])
+        data.append([record[id], amount])
         amount = 0
     for item in data:
-        if item[1] > 0:
-            output[item[0]] = item[1]
+        if item[how_many] > 0:
+            output[item[product_id]] = item[how_many]
     return output
