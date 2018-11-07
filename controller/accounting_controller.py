@@ -104,6 +104,8 @@ def check_month(month):
 
 
 def check_year(year):
+    if type(year) == str:
+        raise ValueError("Input have to be number")
     if int(year) < 0:
         raise ValueError("Wrong year value.")
 
