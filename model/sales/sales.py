@@ -90,6 +90,7 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 
     sold_between = []
     for record in table:
+        record = record.copy()
         month = record[month_index]
         day = record[day_index]
         year = record[year_index]

@@ -47,6 +47,7 @@ def get_available_items(table):
     current_year = 2017
     available_items = []
     for record in table:
+        record = record.copy()
         record_year = int(record[year_index])
         record_durability = int(record[durability_index])
         validity_date = record_year + record_durability
