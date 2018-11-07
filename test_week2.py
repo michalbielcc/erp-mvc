@@ -3,16 +3,16 @@
 from test import *
 
 # Data Analyser module
-from data_analyser import data_analyser
+from model.data_analyser import data_analyser
 
 
 class DataAnalyserTester(unittest.TestCase):
     def test_forbidden_functions(self):
-        check_forbidden_functions(self, "data_analyser/data_analyser.py")
+        check_forbidden_functions(self, "model/data_analyser/data_analyser.py")
 
 
 class Week2CRMTester(unittest.TestCase):
-    data_file = "crm/customers_test.csv"
+    data_file = "model/crm/customers_test.csv"
 
     def test_week2_crm_get_name_by_id(self):
         self.assertEqual(crm.get_name_by_id("kH94Jc#&"), "Daniele Coach")
@@ -25,7 +25,7 @@ class Week2CRMTester(unittest.TestCase):
 
 
 class Week2SalesTester(unittest.TestCase):
-    data_file = "sales/sales_test.csv"
+    data_file = "model/sales/sales_test.csv"
 
     def test_week2_sales_get_title_by_id(self):
         result = sales.get_title_by_id("kH35Ju#&")

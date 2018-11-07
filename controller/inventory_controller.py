@@ -1,6 +1,6 @@
 # everything you'll need is imported:
 from view import terminal_view
-from inventory import inventory
+from model.inventory import inventory
 from controller import common
 
 
@@ -34,18 +34,18 @@ def run():
             if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = inventory.add_id(table, inputs)
                 table = inventory.add(table, new_record)
-                common.export_to_file(table, 'inventory/inventory.csv')
+                common.export_to_file(table, 'model/inventory/inventory.csv')
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year", "Durability"], "Edit Fields")
             types = [str, str, int, int]
             if common.check_input(inputs, types) and check_fields(inputs):
                 table = inventory.update(table, id_, inputs)
-                common.export_to_file(table, 'inventory/inventory.csv')
+                common.export_to_file(table, 'model/inventory/inventory.csv')
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = inventory.remove(table, id_)
-            common.export_to_file(table, 'inventory/inventory.csv')
+            common.export_to_file(table, 'model/inventory/inventory.csv')
         elif choice == "5":
             available_items = inventory.get_available_items(table)
             terminal_view.print_result(available_items, "Available items: ")
