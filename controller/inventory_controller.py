@@ -61,19 +61,10 @@ def check_fields(inputs):
     year_index = 2
     durability_index = 3
     try:
-        check_year(inputs[year_index])
+        common.check_year(inputs[year_index])
+        common.check_amount(inputs[durability_index])
     except ValueError as e:
         terminal_view.print_error_message(str(e))
         return False
     else:
         return True
-
-
-def check_year(year):
-    if int(year) < 0:
-        raise ValueError("Wrong year value.")
-
-
-def check_durability(durability):
-    if int(durability) < 0:
-        raise ValueError("Wrong durability value.")

@@ -69,20 +69,10 @@ def check_fields(inputs):
     price_index = 2
     in_stock_index = 3
     try:
-        check_price(inputs[price_index])
-        check_in_stock(inputs[in_stock_index])
+        common.check_amount(inputs[price_index])
+        common.check_amount(inputs[in_stock_index])
     except ValueError as e:
         terminal_view.print_error_message(str(e))
         return False
     else:
         return True
-
-
-def check_price(price):
-    if int(price) < 0:
-        raise ValueError("Wrong price value.")
-
-
-def check_in_stock(in_stock):
-    if int(in_stock) < 0:
-        raise ValueError("Wrong in stock value.")

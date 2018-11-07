@@ -58,7 +58,7 @@ def run():
 def average_profit_for_year(table):
     try:
         year = terminal_view.get_inputs(["Year"], "Enter a year:")[0]
-        check_year(year)
+        common.check_year(year)
         average_profit = accounting.avg_amount(table, year)
     except ZeroDivisionError:
         terminal_view.print_error_message("There is no such year")
@@ -76,38 +76,16 @@ def check_fields(inputs):
     type_index = 3
     amount_index = 4
     try:
-        check_month(inputs[month_index])
-        check_day(inputs[day_index])
-        check_year(inputs[year_index])
+        common.check_month(inputs[month_index])
+        common.check_day(inputs[day_index])
+        common.check_year(inputs[year_index])
         check_type(inputs[type_index])
-        check_amount(inputs[amount_index])
+        common.check_amount(inputs[amount_index])
     except ValueError as e:
         terminal_view.print_error_message(str(e))
         return False
     else:
         return True
-
-
-def check_amount(amount):
-    if int(amount) < 0:
-        raise ValueError("Wrong amount value.")
-
-
-def check_day(day):
-    if int(day) > 30 or int(day) < 1:
-        raise ValueError("Wrong day value.")
-
-
-def check_month(month):
-    if int(month) > 12 or int(month) < 1:
-        raise ValueError("Wrong month value.")
-
-
-def check_year(year):
-    if type(year) == str:
-        raise ValueError("Input have to be number")
-    if int(year) < 0:
-        raise ValueError("Wrong year value.")
 
 
 def check_type(type_):

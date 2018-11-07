@@ -59,14 +59,9 @@ def check_fields(inputs):
     '''Checks if inputs have expected values'''
     year_index = 1
     try:
-        check_year(inputs[year_index])
+        common.check_year(inputs[year_index])
     except ValueError as e:
         terminal_view.print_error_message(str(e))
         return False
     else:
         return True
-
-
-def check_year(year):
-    if int(year) < 0:
-        raise ValueError("Wrong year value.")

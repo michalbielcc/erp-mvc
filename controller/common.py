@@ -28,3 +28,28 @@ def check_id_presence(table, id_):
 
 def export_to_file(table, filename):
     data_manager.write_table_to_file(filename, table)
+
+
+def check_year(year):
+    try:
+        x = int(year) + 1
+    except ValueError:
+        raise ValueError('Use numbers only.')
+
+    if int(year) < 1990 and int(year) > 2020:
+        raise ValueError("Wrong year value.")
+
+
+def check_month(month):
+    if int(month) > 12 or int(month) < 1:
+        raise ValueError("Wrong month value.")
+
+
+def check_day(day):
+    if int(day) > 30 or int(day) < 1:
+        raise ValueError("Wrong day value.")
+
+
+def check_amount(amount):
+    if int(amount) < 0:
+        raise ValueError("Use positive numbers for values")

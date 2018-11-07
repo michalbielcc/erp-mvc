@@ -103,12 +103,12 @@ def sold_between(table):
     year_to_index = 5
     try:
         has_ints(inputs)
-        check_day(inputs[day_from_index])
-        check_day(inputs[day_to_index])
-        check_month(inputs[month_from_index])
-        check_month(inputs[month_to_index])
-        check_year(inputs[year_from_index])
-        check_year(inputs[year_to_index])
+        common.check_day(inputs[day_from_index])
+        common.check_day(inputs[day_to_index])
+        common.check_month(inputs[month_from_index])
+        common.check_month(inputs[month_to_index])
+        common.check_year(inputs[year_from_index])
+        common.check_year(inputs[year_to_index])
     except ValueError as e:
         terminal_view.print_error_message(str(e))
     else:
@@ -123,35 +123,15 @@ def check_fields(inputs):
     day_index = 3
     year_index = 4
     try:
-        check_price(inputs[price_index])
-        check_month(inputs[month_index])
-        check_day(inputs[day_index])
-        check_year(inputs[year_index])
+        common.check_ammount(inputs[price_index])
+        common.check_month(inputs[month_index])
+        common.check_day(inputs[day_index])
+        common.check_year(inputs[year_index])
     except ValueError as e:
         terminal_view.print_error_message(str(e))
         return False
     else:
         return True
-
-
-def check_price(price):
-    if int(price) < 0:
-        raise ValueError("Wrong price input")
-
-
-def check_day(day):
-    if int(day) > 30 or int(day) < 1:
-        raise ValueError("Wrong day value.")
-
-
-def check_month(month):
-    if int(month) > 12 or int(month) < 1:
-        raise ValueError("Wrong month value.")
-
-
-def check_year(year):
-    if int(year) < 0:
-        raise ValueError("Wrong year value.")
 
 
 def has_ints(table):
