@@ -26,34 +26,58 @@ def run():
     while choice != "0":
         choice = terminal_view.get_submenu_choice(options, "Inventory menu")
         if choice == "1":
-            terminal_view.print_table(table, ["Id", "Name", "Manufacturer", "Purchase year", "Durability"])
+            show_inventory(table)
         elif choice == "2":
-            inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year",
-                                               "Durability"], "Add new item to inventory:")
-            types = [str, str, int, int]
-            if common.check_input(inputs, types) and check_fields(inputs):
-                new_record = inventory.add_id(table, inputs)
-                table = inventory.add(table, new_record)
-                common.export_to_file(table, 'model/inventory/inventory.csv')
+            add_new_record(table)
         elif choice == "3":
-            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
-            inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year", "Durability"], "Edit Fields")
-            types = [str, str, int, int]
-            if common.check_input(inputs, types) and check_fields(inputs):
-                table = inventory.update(table, id_, inputs)
-                common.export_to_file(table, 'model/inventory/inventory.csv')
+            edit_record(table)
         elif choice == "4":
-            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
-            table = inventory.remove(table, id_)
-            common.export_to_file(table, 'model/inventory/inventory.csv')
+            delete_record(table)
         elif choice == "5":
-            available_items = inventory.get_available_items(table)
-            terminal_view.print_result(available_items, "Available items: ")
+            available_items_info(table)
         elif choice == "6":
-            durability_averages = inventory.get_average_durability_by_manufacturers(table)
-            terminal_view.print_result(durability_averages, "Average durability by manufacturer: ")
+            show_average_durability(table)
         elif choice != '0':
             terminal_view.print_error_message("There is no such choice.")
+
+
+def show_inventory(table):
+    terminal_view.print_table(table, ["Id", "Name", "Manufacturer", "Purchase year", "Durability"])
+
+
+def add_new_record(table):
+    inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year",
+                                       "Durability"], "Add new item to inventory:")
+    types = [str, str, int, int]
+    if common.check_input(inputs, types) and check_fields(inputs):
+        new_record = inventory.add_id(table, inputs)
+        table = inventory.add(table, new_record)
+        common.export_to_file(table, 'model/inventory/inventory.csv')
+
+
+def edit_record(table):
+    id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
+    inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year", "Durability"], "Edit Fields")
+    types = [str, str, int, int]
+    if common.check_input(inputs, types) and check_fields(inputs):
+        table = inventory.update(table, id_, inputs)
+        common.export_to_file(table, 'model/inventory/inventory.csv')
+
+
+def delete_record(table):
+    id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
+    table = inventory.remove(table, id_)
+    common.export_to_file(table, 'model/inventory/inventory.csv')
+
+
+def available_items_info(table):
+    available_items = inventory.get_available_items(table)
+    terminal_view.print_result(available_items, "Available items: ")
+
+
+def show_average_durability(table):
+    durability_averages = inventory.get_average_durability_by_manufacturers(table)
+    terminal_view.print_result(durability_averages, "Average durability by manufacturer: ")
 
 
 def check_fields(inputs):
