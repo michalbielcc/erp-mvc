@@ -44,7 +44,7 @@ def run():
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = store.remove(table, id_)
-            common.export_to_file(table, 'model.store/games.csv')
+            common.export_to_file(table, 'model/store/games.csv')
         elif choice == "5":
             counts_by_manufacturers = store.get_counts_by_manufacturers(table)
             terminal_view.print_result(counts_by_manufacturers, "Game count by manufacturer: ")
