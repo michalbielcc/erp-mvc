@@ -10,8 +10,8 @@ Data table structure:
 """
 
 # everything you'll need is imported:
-import data_manager
-import common
+from model import data_manager
+from model import common
 
 
 def add(table, record):
@@ -85,7 +85,7 @@ def get_average_by_manufacturer(table, manufacturer):
 
 
 def read_store_data():
-    table = data_manager.get_table_from_file("store/games.csv")
+    table = data_manager.get_table_from_file("model/store/games.csv")
     return table
 
 

@@ -1,6 +1,6 @@
 # everything you'll need is imported:
 from view import terminal_view
-from hr import hr
+from model.hr import hr
 from controller import common
 
 
@@ -33,18 +33,18 @@ def run():
             if common.check_input(inputs, types) and check_fields(inputs):
                 new_record = hr.add_id(table, inputs)
                 table = hr.add(table, new_record)
-                common.export_to_file(table, 'hr/persons.csv')
+                common.export_to_file(table, 'model/hr/persons.csv')
         elif choice == "3":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
             inputs = terminal_view.get_inputs(["Name", "Birth Year"], "Edit Fields")
             types = [str, int]
             if common.check_input(inputs, types) and check_fields(inputs):
                 table = hr.update(table, id_, inputs)
-                common.export_to_file(table, 'hr/persons.csv')
+                common.export_to_file(table, 'model/hr/persons.csv')
         elif choice == "4":
             id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
             table = hr.remove(table, id_)
-            common.export_to_file(table, 'hr/persons.csv')
+            common.export_to_file(table, 'model/hr/persons.csv')
         elif choice == "5":
             oldest_person = hr.get_oldest_person(table)
             terminal_view.print_result(oldest_person, "Oldest person: ")

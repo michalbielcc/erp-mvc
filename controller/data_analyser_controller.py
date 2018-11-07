@@ -1,5 +1,5 @@
 from view import terminal_view
-from data_analyser import data_analyser
+from model.data_analyser import data_analyser
 
 
 def run():

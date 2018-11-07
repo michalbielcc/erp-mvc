@@ -2,7 +2,7 @@
 implement commonly used functions here
 """
 from view import terminal_view
-import data_manager
+from model import data_manager
 
 
 def check_input(inputs, types):

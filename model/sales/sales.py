@@ -11,9 +11,9 @@ Data table structure:
 """
 
 # everything you'll need is imported:
-import data_manager
-import common
-from crm import crm
+from model import data_manager
+from model import common
+from model.crm import crm
 
 
 def add(table, record):
@@ -115,7 +115,7 @@ def find_id_by_name(name, table):
 
 
 def read_sales_data():
-    table = data_manager.get_table_from_file("sales/sales.csv")
+    table = data_manager.get_table_from_file("model/sales/sales.csv")
     return table
 
 

@@ -8,8 +8,8 @@ Data table structure:
 """
 
 # everything you'll need is imported:
-import data_manager
-import common
+from model import data_manager
+from model import common
 
 
 def add(table, record):
@@ -85,7 +85,7 @@ def get_persons_closest_to_average(table):
 
 
 def read_hr_data():
-    table = data_manager.get_table_from_file("hr/persons.csv")
+    table = data_manager.get_table_from_file("model/hr/persons.csv")
     return table
 
 
