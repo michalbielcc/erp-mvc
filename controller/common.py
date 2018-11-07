@@ -36,7 +36,7 @@ def check_year(year):
     except ValueError:
         raise ValueError('Use numbers only.')
 
-    if int(year) < 1990 and int(year) > 2020:
+    if int(year) < 1920 or int(year) > 2020:
         raise ValueError("Wrong year value.")
 
 

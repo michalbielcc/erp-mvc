@@ -26,33 +26,57 @@ def run():
     while choice != "0":
         choice = terminal_view.get_submenu_choice(options, "HR menu")
         if choice == "1":
-            terminal_view.print_table(table, ["Id", "Name", "Birth year"])
+            show_hr(table)
         elif choice == "2":
-            inputs = terminal_view.get_inputs(["Name", "Birth year"], "Add new HR record:")
-            types = [str, int]
-            if common.check_input(inputs, types) and check_fields(inputs):
-                new_record = hr.add_id(table, inputs)
-                table = hr.add(table, new_record)
-                common.export_to_file(table, 'model/hr/persons.csv')
+            add_new_record(table)
         elif choice == "3":
-            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
-            inputs = terminal_view.get_inputs(["Name", "Birth Year"], "Edit Fields")
-            types = [str, int]
-            if common.check_input(inputs, types) and check_fields(inputs):
-                table = hr.update(table, id_, inputs)
-                common.export_to_file(table, 'model/hr/persons.csv')
+            edit_record(table)
         elif choice == "4":
-            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
-            table = hr.remove(table, id_)
-            common.export_to_file(table, 'model/hr/persons.csv')
+            delete_record(table)
         elif choice == "5":
-            oldest_person = hr.get_oldest_person(table)
-            terminal_view.print_result(oldest_person, "Oldest person: ")
+            oldest_person_info(table)
         elif choice == "6":
-            near_average = hr.get_persons_closest_to_average(table)
-            terminal_view.print_result(near_average, "Closest to average age: ")
+            closest_to_average_age(table)
         elif choice != '0':
             terminal_view.print_error_message("There is no such choice.")
+
+
+def show_hr(table):
+    terminal_view.print_table(table, ["Id", "Name", "Birth year"])
+
+
+def add_new_record(table):
+    inputs = terminal_view.get_inputs(["Name", "Birth year"], "Add new HR record:")
+    types = [str, int]
+    if common.check_input(inputs, types) and check_fields(inputs):
+        new_record = hr.add_id(table, inputs)
+        table = hr.add(table, new_record)
+        common.export_to_file(table, 'model/hr/persons.csv')
+
+
+def edit_record(table):
+    id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
+    inputs = terminal_view.get_inputs(["Name", "Birth Year"], "Edit Fields")
+    types = [str, int]
+    if common.check_input(inputs, types) and check_fields(inputs):
+        table = hr.update(table, id_, inputs)
+        common.export_to_file(table, 'model/hr/persons.csv')
+
+
+def delete_record(table):
+    id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
+    table = hr.remove(table, id_)
+    common.export_to_file(table, 'model/hr/persons.csv')
+
+
+def oldest_person_info(table):
+    oldest_person = hr.get_oldest_person(table)
+    terminal_view.print_result(oldest_person, "Oldest person: ")
+
+
+def closest_to_average_age(table):
+    near_average = hr.get_persons_closest_to_average(table)
+    terminal_view.print_result(near_average, "Closest to average age: ")
 
 
 def check_fields(inputs):
