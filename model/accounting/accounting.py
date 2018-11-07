@@ -12,7 +12,7 @@ Data table structure:
 
 # everything you'll need is imported:
 from model import data_manager
-import common
+from model import common
 
 
 def add(table, record):
