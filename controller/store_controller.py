@@ -26,32 +26,52 @@ def run():
     while choice != "0":
         choice = terminal_view.get_submenu_choice(options, "Store menu")
         if choice == "1":
-            terminal_view.print_table(table, ["Id", "Title", "Manufacturer", 'Price', 'In stock'])
+            show_accounting(table)
         elif choice == "2":
-            inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Add new Store record:")
-            types = [str, str, int, int]
-            if common.check_input(inputs, types) and check_fields(inputs):
-                new_record = store.add_id(table, inputs)
-                table = store.add(table, new_record)
-                common.export_to_file(table, 'model/store/games.csv')
+            add_new_record(table)
         elif choice == "3":
-            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
-            inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Edit Fields")
-            types = [str, str, int, int]
-            if common.check_input(inputs, types) and check_fields(inputs):
-                table = store.update(table, id_, inputs)
-                common.export_to_file(table, 'model/store/games.csv')
+            edit_record(table)
         elif choice == "4":
-            id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
-            table = store.remove(table, id_)
-            common.export_to_file(table, 'model/store/games.csv')
+            delete_record(table)
         elif choice == "5":
-            counts_by_manufacturers = store.get_counts_by_manufacturers(table)
-            terminal_view.print_result(counts_by_manufacturers, "Game count by manufacturer: ")
+            game_count_by_manufacturer(table)
         elif choice == "6":
             average_by_manufacturer(table)
         elif choice != '0':
             terminal_view.print_error_message("There is no such choice.")
+
+
+def show_accounting(table):
+    terminal_view.print_table(table, ["Id", "Title", "Manufacturer", 'Price', 'In stock'])
+
+
+def add_new_record(table):
+    inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Add new Store record:")
+    types = [str, str, int, int]
+    if common.check_input(inputs, types) and check_fields(inputs):
+        new_record = store.add_id(table, inputs)
+        table = store.add(table, new_record)
+        common.export_to_file(table, 'model/store/games.csv')
+
+
+def edit_record(table):
+    id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
+    inputs = terminal_view.get_inputs(["Title", "Manufacturer", 'Price', 'In stock'], "Edit Fields")
+    types = [str, str, int, int]
+    if common.check_input(inputs, types) and check_fields(inputs):
+        table = store.update(table, id_, inputs)
+        common.export_to_file(table, 'model/store/games.csv')
+
+
+def delete_record(table):
+    id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
+    table = store.remove(table, id_)
+    common.export_to_file(table, 'model/store/games.csv')
+
+
+def game_count_by_manufacturer(table):
+    counts_by_manufacturers = store.get_counts_by_manufacturers(table)
+    terminal_view.print_result(counts_by_manufacturers, "Game count by manufacturer: ")
 
 
 def average_by_manufacturer(table):
