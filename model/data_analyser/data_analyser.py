@@ -6,11 +6,11 @@
 # todo: importing everything you need
 # importing everything you need
 import os
-import common
-from sales import sales
-from crm import crm
-from sales import sales
-from store import store
+from model import common
+from model.sales import sales
+from model.crm import crm
+from model.sales import sales
+from model.store import store
 
 
 def get_the_last_buyer_name():
@@ -21,7 +21,7 @@ def get_the_last_buyer_name():
         Customer name of the last buyer
     """
     return crm.get_name_by_id(get_the_last_buyer_id())
-  
+
 
 def get_the_last_buyer_id():
     """
@@ -36,7 +36,7 @@ def get_the_last_buyer_id():
     for i in sales.read_sales_data():
         if int(''.join(i[5]+i[3]+i[4])) > index:
             index = int(''.join(i[5]+i[3]+i[4]))
-    
+
     for i in sales.read_sales_data():
         if int(''.join(i[5]+i[3]+i[4])) == index:
             return i[6]
@@ -50,7 +50,7 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
 
    Returns:
         Tuple of customer name and the sum the customer spent
-    """   
+    """
     amount_spent = 0
     name = ''
     id = 0
@@ -58,13 +58,13 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
     price = 2
     customer_name = 1
     for record in crm.read_crm_data():
-        amount = 0 
+        amount = 0
         for item in sales.read_sales_data():
             if record[id] == item[id2]:
                 amount += int(item[price])
         if amount > amount_spent:
             amount_spent = amount
-            name = record[customer_name]     
+            name = record[customer_name]
     return (name, amount_spent)
 
 
@@ -155,7 +155,7 @@ def get_the_most_frequent_buyers_ids(num=1):
             if record[id] == item[id2]:
                 amount += 1
         data.append([record[id], amount])
-        
+
     for i in range(num):
         amount = 0
         for item in data:

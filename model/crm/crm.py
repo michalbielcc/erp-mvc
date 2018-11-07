@@ -9,8 +9,8 @@ Data table structure:
 """
 
 # everything you'll need is imported:
-import data_manager
-import common
+from model import data_manager
+from model import common
 
 
 def add(table, record):
@@ -92,7 +92,7 @@ def get_subscribed_emails(table):
 
 
 def read_crm_data():
-    table = data_manager.get_table_from_file("crm/customers.csv")
+    table = data_manager.get_table_from_file("model/crm/customers.csv")
     return table
 
 
