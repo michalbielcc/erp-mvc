@@ -24,7 +24,7 @@ def run():
     table = accounting.read_accounting_data()
     choice = None
     while choice != "0":
-        choice = terminal_view.get_submenu_choice(options)
+        choice = terminal_view.get_submenu_choice(options, "Accounting menu")
         if choice == "1":
             terminal_view.print_table(table, ["Id", "Month", "Day", "Year", "Type", "Amount"])
         elif choice == "2":

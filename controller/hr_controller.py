@@ -24,7 +24,7 @@ def run():
     table = hr.read_hr_data()
     choice = None
     while choice != "0":
-        choice = terminal_view.get_submenu_choice(options)
+        choice = terminal_view.get_submenu_choice(options, "HR menu")
         if choice == "1":
             terminal_view.print_table(table, ["Id", "Name", "Birth year"])
         elif choice == "2":

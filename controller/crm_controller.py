@@ -24,7 +24,7 @@ def run():
     table = crm.read_crm_data()
     choice = None
     while choice != "0":
-        choice = terminal_view.get_submenu_choice(options)
+        choice = terminal_view.get_submenu_choice(options, "CRM menu")
         if choice == "1":
             terminal_view.print_table(table, ["Id", "Name", "Email", "Subscribed"])
         elif choice == "2":

@@ -13,7 +13,7 @@ def run():
     choice = None
 
     while choice != '0':
-        choice = terminal_view.get_submenu_choice(options)
+        choice = terminal_view.get_submenu_choice(options, "Data analyser menu")
         if choice == '1':
             last_buyer_name = data_analyser.get_the_last_buyer_name()
             terminal_view.print_result(last_buyer_name, 'Name of last buyer is:')

@@ -33,7 +33,7 @@ def run():
     table = sales.read_sales_data()
     choice = None
     while choice != "0":
-        choice = terminal_view.get_submenu_choice(options)
+        choice = terminal_view.get_submenu_choice(options, "Sales menu")
         if choice == "1":
             terminal_view.print_table(table, ["Id", "Title", "Price", "Month", "Day", "Year", "Customer Id"])
         elif choice == "2":

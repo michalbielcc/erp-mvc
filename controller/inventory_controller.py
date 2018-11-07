@@ -24,7 +24,7 @@ def run():
     table = inventory.read_inventory_data()
     choice = None
     while choice != "0":
-        choice = terminal_view.get_submenu_choice(options)
+        choice = terminal_view.get_submenu_choice(options, "Inventory menu")
         if choice == "1":
             terminal_view.print_table(table, ["Id", "Name", "Manufacturer", "Purchase year", "Durability"])
         elif choice == "2":

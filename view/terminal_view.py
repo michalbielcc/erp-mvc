@@ -69,7 +69,7 @@ def print_result(result, label):
         None: This function doesn't return anything it only prints to console.
     """
     type_ = type(result)
-    if type_ is int or type_ is str or type_ is float: 
+    if type_ is int or type_ is str or type_ is float:
         special_print(f'{label} {result}')
 
     if type_ is list or type_ is set or type_ is tuple:
@@ -143,8 +143,8 @@ def get_choice(options):
     return inputs[0]
 
 
-def get_submenu_choice(options):
-    print_menu("\nSubmenu", options, "Return to main menu")
+def get_submenu_choice(options, submenu_name):
+    print_menu(f"\n{submenu_name}", options, "Return to main menu")
     inputs = get_inputs(["Please enter a number"], "")
     print()
     return inputs[0]
@@ -167,13 +167,13 @@ def prRed(skk):
     print("\033[91m {}\033[00m" .format(skk))
 
 
-def prGreen(skk, sep=' ',end='\n'):
-    print("\033[38:2:1:125:21m\033[1m{}\033[00m" .format(skk),sep=sep, end=end) 
+def prGreen(skk, sep=' ', end='\n'):
+    print("\033[38:2:1:125:21m\033[1m{}\033[00m" .format(skk), sep=sep, end=end)
 
 
 def print_blue_underscore(text):
     print(f'\033[4m\033[38:2:0:7:112m{text}\033[00m')
 
 
-def special_print(text, sep=' ',end='\n'):
+def special_print(text, sep=' ', end='\n'):
     print(f'\033[38:2:131:20:8m{text}\033[0m')

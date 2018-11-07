@@ -24,7 +24,7 @@ def run():
 
     choice = None
     while choice != "0":
-        choice = terminal_view.get_submenu_choice(options)
+        choice = terminal_view.get_submenu_choice(options, "Store menu")
         if choice == "1":
             terminal_view.print_table(table, ["Id", "Title", "Manufacturer", 'Price', 'In stock'])
         elif choice == "2":
