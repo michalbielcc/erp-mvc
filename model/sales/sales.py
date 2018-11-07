@@ -140,10 +140,8 @@ def get_title_by_id(id):
     Returns:
         str the title of the item
     """
-
-    # your code
-
-    pass
+    table = read_sales_data()
+    return get_title_by_id_from_table(table, id)
 
 
 def get_title_by_id_from_table(table, id):
@@ -158,9 +156,13 @@ def get_title_by_id_from_table(table, id):
         str the title of the item
     """
 
-    # your code
+    id_index = 0
+    title_index = 1
 
-    pass
+    for record in table:
+        if record[id_index] == id:
+            return record[title_index]
+    return None
 
 
 def get_item_id_sold_last():
@@ -171,10 +173,8 @@ def get_item_id_sold_last():
     Returns:
         (str) the _id_ of the item that was sold most recently.
     """
-
-    # your code
-
-    pass
+    table = read_sales_data()
+    return get_item_id_sold_last_from_table(table)
 
 
 def get_item_id_sold_last_from_table(table):
@@ -188,9 +188,29 @@ def get_item_id_sold_last_from_table(table):
         (str) the _id_ of the item that was sold most recently.
     """
 
-    # your code
+    id_index = 0
+    month_index = 3
+    day_index = 4
+    year_index = 5
 
-    pass
+    month = table[0][month_index]
+    day = table[0][day_index]
+    year = table[0][year_index]
+
+    latest_date = f"{year:0>4}{month:0>2}{day:0>2}"
+    latest_id = table[0][id_index]
+
+    sold_between = []
+    for record in table[1:]:
+        month = record[month_index]
+        day = record[day_index]
+        year = record[year_index]
+        date = f"{year:0>4}{month:0>2}{day:0>2}"
+        if latest_date < date:
+            latest_id = record[id_index]
+            latest_date = date
+
+    return latest_id
 
 
 def get_item_title_sold_last_from_table(table):
@@ -204,9 +224,29 @@ def get_item_title_sold_last_from_table(table):
         (str) the _title_ of the item that was sold most recently.
     """
 
-    # your code
+    title_index = 1
+    month_index = 3
+    day_index = 4
+    year_index = 5
 
-    pass
+    month = table[0][month_index]
+    day = table[0][day_index]
+    year = table[0][year_index]
+
+    latest_date = f"{year:0>4}{month:0>2}{day:0>2}"
+    latest_title = table[0][title_index]
+
+    sold_between = []
+    for record in table[1:]:
+        month = record[month_index]
+        day = record[day_index]
+        year = record[year_index]
+        date = f"{year:0>4}{month:0>2}{day:0>2}"
+        if latest_date < date:
+            latest_title = record[title_index]
+            latest_date = date
+
+    return latest_title
 
 
 def get_the_sum_of_prices(item_ids):
