@@ -9,6 +9,7 @@ from controller import crm_controller
 from controller import common
 from controller import data_analyser_controller
 
+
 def run():
     options = ["Store manager",
                "Human resources manager",

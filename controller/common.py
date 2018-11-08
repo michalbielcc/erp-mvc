@@ -53,3 +53,18 @@ def check_day(day):
 def check_amount(amount):
     if int(amount) < 0:
         raise ValueError("Use positive numbers for values")
+
+
+def find_record_and_fill_blanks(table, id_, record):
+    for i, old_record in enumerate(table):
+        if old_record[0] == id_:
+            fill_blanks(record, old_record[1:])
+            break
+
+
+def fill_blanks(new, old):
+    '''updates blank places in new with old info'''
+
+    for i in range(len(old)):
+        if not new[i]:
+            new[i] = old[i]

@@ -58,6 +58,7 @@ def add_new_record(table):
 def edit_record(table):
     id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
     inputs = terminal_view.get_inputs(["Name", "Manufacturer", "Purchase year", "Durability"], "Edit Fields")
+    common.find_record_and_fill_blanks(table, id_, inputs)
     types = [str, str, int, int]
     if common.check_input(inputs, types) and check_fields(inputs):
         table = inventory.update(table, id_, inputs)

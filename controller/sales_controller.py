@@ -84,6 +84,7 @@ def edit_record(table):
     id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
     inputs = terminal_view.get_inputs(
         ["Title", "Price", "Month", "Day", "Year", "Customer Id"], "Edit Fields: ")
+    common.find_record_and_fill_blanks(table, id_, inputs)
     types = [str, int, int, int, int, str]
     if common.check_input(inputs, types) and check_fields(inputs):
         table = sales.update(table, id_, inputs)

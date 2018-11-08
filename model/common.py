@@ -121,7 +121,6 @@ def update(table, id_, record):
     for i, old_record in enumerate(table):
         if old_record[0] == id_:
             new_record = [id_] + record
-            fill_blanks(new_record, old_record)
             table[i] = new_record
             break
 
