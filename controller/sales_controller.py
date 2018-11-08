@@ -82,19 +82,25 @@ def add_new_record(table):
 
 def edit_record(table):
     id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
-    inputs = terminal_view.get_inputs(
-        ["Title", "Price", "Month", "Day", "Year", "Customer Id"], "Edit Fields: ")
-    common.find_record_and_fill_blanks(table, id_, inputs)
-    types = [str, int, int, int, int, str]
-    if common.check_input(inputs, types) and check_fields(inputs):
-        table = sales.update(table, id_, inputs)
-        common.export_to_file(table, 'model/sales/sales.csv')
+    if common.is_id_in_table(id_, table):
+        inputs = terminal_view.get_inputs(
+            ["Title", "Price", "Month", "Day", "Year", "Customer Id"], "Edit Fields: ")
+        common.find_record_and_fill_blanks(table, id_, inputs)
+        types = [str, int, int, int, int, str]
+        if common.check_input(inputs, types) and check_fields(inputs):
+            table = sales.update(table, id_, inputs)
+            common.export_to_file(table, 'model/sales/sales.csv')
+    else:
+        terminal_view.print_error_message("Record of the given id has not been found.")
 
 
 def delete_record(table):
     id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
-    table = sales.remove(table, id_)
-    common.export_to_file(table, 'model/sales/sales.csv')
+    if common.is_id_in_table(id_, table):
+        table = sales.remove(table, id_)
+        common.export_to_file(table, 'model/sales/sales.csv')
+    else:
+        terminal_view.print_error_message("Record of the given id has not been found.")
 
 
 def show_cheapest_id(table):
@@ -129,8 +135,11 @@ def sold_between(table):
 
 def game_titles_by_id(table):
     id_ = terminal_view.get_inputs(["Id"], "Enter id of the record: ")[0]
-    item_title = sales.get_title_by_id_from_table(table, id_)
-    terminal_view.print_result(item_title, f"Title of game with id {id_}:")
+    if common.is_id_in_table(id_, table):
+        item_title = sales.get_title_by_id_from_table(table, id_)
+        terminal_view.print_result(item_title, f"Title of game with id {id_}:")
+    else:
+        terminal_view.print_error_message("Record of the given id has not been found.")
 
 
 def last_sold_game_id(table):
@@ -149,9 +158,12 @@ def sum_price_by_id(table):
 
 
 def cusomer_id_by_sale_id(table):
-    sale_id = terminal_view.get_inputs(["Id"], "Enter id of the record: ")[0]
-    customer_id = sales.get_customer_id_by_sale_id_from_table(table, sale_id)
-    terminal_view.print_result(customer_id, "Customer id: ")
+    id_ = terminal_view.get_inputs(["Id"], "Enter id of the record: ")[0]
+    if common.is_id_in_table(id_, table):
+        customer_id = sales.get_customer_id_by_sale_id_from_table(table, sale_id)
+        terminal_view.print_result(customer_id, "Customer id: ")
+    else:
+        terminal_view.print_error_message("Record of the given id has not been found.")
 
 
 def show_all_customers_ids(table):

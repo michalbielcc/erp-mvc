@@ -50,13 +50,6 @@ def get_average(numbers: list) -> float:
     return average
 
 
-def fill_blanks(new, old):
-    '''updates blank places in new with old info'''
-    for i in range(len(old)):
-        if not new[i]:
-            new[i] = old[i]
-
-
 def order_alphabetically(to_sort: list):  # vurnelable to list with elements of type different from str
     '''Sorts (in place) elements in the given list in alphabetical order
 

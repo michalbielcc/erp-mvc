@@ -68,3 +68,11 @@ def fill_blanks(new, old):
     for i in range(len(old)):
         if not new[i]:
             new[i] = old[i]
+
+
+def is_id_in_table(id_, table):
+    id_index = 0
+    for record in table:
+        if record[id_index] == id_:
+            return True
+    return False

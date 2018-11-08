@@ -56,18 +56,24 @@ def add_new_record(table):
 
 def edit_record(table):
     id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to edit:")[0]
-    inputs = terminal_view.get_inputs(["Name", "Email", "Subscribed"], "Edit Fields: ")
-    common.find_record_and_fill_blanks(table, id_, inputs)
-    types = [str, str, int]
-    if common.check_input(inputs, types) and check_fields(inputs):
-        table = crm.update(table, id_, inputs)
-        common.export_to_file(table, 'model/crm/customers.csv')
+    if common.is_id_in_table(id_, table):
+        inputs = terminal_view.get_inputs(["Name", "Email", "Subscribed"], "Edit Fields: ")
+        common.find_record_and_fill_blanks(table, id_, inputs)
+        types = [str, str, int]
+        if common.check_input(inputs, types) and check_fields(inputs):
+            table = crm.update(table, id_, inputs)
+            common.export_to_file(table, 'model/crm/customers.csv')
+    else:
+        terminal_view.print_error_message("Record of the given id has not been found.")
 
 
 def delete_record(table):
     id_ = terminal_view.get_inputs(["Id"], "Enter id of the record you want to delete:")[0]
-    table = crm.remove(table, id_)
-    common.export_to_file(table, 'model/crm/customers.csv')
+    if common.is_id_in_table(id_, table):
+        table = crm.remove(table, id_)
+        common.export_to_file(table, 'model/crm/customers.csv')
+    else:
+        terminal_view.print_error_message("Record of the given id has not been found.")
 
 
 def id_of_longest_name(table):
